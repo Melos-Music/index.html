@@ -7,90 +7,85 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="theme-color" content="#34c759">
-<title>Talk</title>
+<title>Melos</title>
 <style>
 :root {
-  --g:      #34c759;
-  --g2:     #2aad4a;
+  --g: #34c759;
+  --g2: #2aad4a;
   --g-glow: rgba(52,199,89,0.22);
   --g-soft: rgba(52,199,89,0.08);
-  --bg:     #0d0d0d;
-  --bg2:    #111411;
-  --card:   #161a16;
-  --card2:  #1c211c;
+  --bg: #0d0d0d;
+  --bg2: #111411;
+  --card: #161a16;
+  --card2: #1c211c;
   --border: rgba(52,199,89,0.12);
-  --border2:rgba(255,255,255,0.06);
-  --txt:    #f0f4f0;
-  --txt2:   rgba(240,244,240,0.5);
-  --txt3:   rgba(240,244,240,0.25);
-  --red:    #ff3b30;
-  --mono:   'Courier New','Menlo',monospace;
-  --sans:   '-apple-system','BlinkMacSystemFont','Helvetica Neue',sans-serif;
-  --safe-top: env(safe-area-inset-top, 0px);
-  --safe-bot: env(safe-area-inset-bottom, 0px);
+  --border2: rgba(255,255,255,0.06);
+  --txt: #f0f4f0;
+  --txt2: rgba(240,244,240,0.5);
+  --txt3: rgba(240,244,240,0.25);
+  --red: #ff3b30;
+  --serif: 'Georgia','Times New Roman',serif;
+  --mono: 'Courier New','Menlo',monospace;
+  --sans: '-apple-system','BlinkMacSystemFont','Helvetica Neue',sans-serif;
+  --safe-top: env(safe-area-inset-top,0px);
+  --safe-bot: env(safe-area-inset-bottom,0px);
 }
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 html,body{width:100%;height:100%;overflow:hidden;background:var(--bg);color:var(--txt);font-family:var(--sans);-webkit-font-smoothing:antialiased}
 button{-webkit-appearance:none;appearance:none;font:inherit;cursor:pointer;border:none;background:none;}
 
-/* ── STATUS BAR GREEN ── */
-.site-banner{
-position:fixed;top:0;left:0;right:0;
-height:calc(var(–safe-top) + 4px);
-background:var(–g);z-index:300;pointer-events:none;
-clip-path:path(‘M 0 0 L 100% 0 L 100% 0 C 80% 0,75% 100%,65% 100% L 35% 100% C 25% 100%,20% 0,0 0 Z’);
-}
+/* ── STATUS BANNER ── */
+.site-banner{position:fixed;top:0;left:0;right:0;height:var(–safe-top);background:#34c759;z-index:999;pointer-events:none;}
 
-/* ══ PERMISSION SCREEN ══ */
-.perm-screen{
-position:fixed;inset:0;z-index:200;
+/* ══ PASSWORD SCREEN ══ */
+.pass-screen{
+position:fixed;inset:0;z-index:500;
 background:linear-gradient(160deg,#0a180c 0%,#0d0d0d 60%,#050d06 100%);
 display:flex;flex-direction:column;align-items:center;justify-content:center;
 padding:40px 28px;
 padding-top:max(env(safe-area-inset-top,50px),40px);
 }
-.perm-screen::before{
+.pass-screen::before{
 content:’’;position:fixed;top:0;left:0;right:0;
-height:calc(env(safe-area-inset-top,50px) + 4px);
-background:var(–g);z-index:201;
-clip-path:path(‘M 0 0 L 100% 0 L 100% 0 C 80% 0,75% 100%,65% 100% L 35% 100% C 25% 100%,20% 0,0 0 Z’);
+height:env(safe-area-inset-top,50px);
+background:#34c759;z-index:501;
 }
-.perm-app-icon{
+.pass-app-icon{
 width:72px;height:72px;border-radius:20px;
 background:linear-gradient(135deg,var(–g2),var(–g));
 display:flex;align-items:center;justify-content:center;
 margin:0 auto 16px;
 box-shadow:0 8px 32px rgba(52,199,89,0.35);
 }
-.perm-app-icon svg{width:36px;height:36px;color:#040c05}
-.perm-app-name{font-size:24px;font-weight:700;color:var(–txt);text-align:center;margin-bottom:4px;letter-spacing:-0.01em}
-.perm-tagline{font-family:var(–mono);font-size:10px;color:var(–txt3);letter-spacing:0.25em;text-align:center;margin-bottom:36px;text-transform:uppercase}
-.perm-card{
-width:100%;max-width:320px;background:var(–card);
-border:1px solid var(–border);border-radius:20px;padding:20px;margin-bottom:24px;
+.pass-app-icon svg{width:36px;height:36px;color:#040c05}
+.pass-app-name{font-family:var(–serif);font-size:28px;color:var(–g);text-align:center;margin-bottom:4px;letter-spacing:-0.01em}
+.pass-tagline{font-family:var(–mono);font-size:10px;color:var(–txt3);letter-spacing:0.25em;text-align:center;margin-bottom:40px;text-transform:uppercase}
+.pass-input-wrap{
+width:100%;max-width:320px;
+background:var(–card);border:1px solid var(–border);border-radius:16px;
+display:flex;align-items:center;gap:12px;padding:14px 18px;margin-bottom:16px;
+transition:border-color .2s;
 }
-.perm-row{display:flex;align-items:center;gap:14px;padding:10px 0;border-bottom:1px solid var(–border2)}
-.perm-row:last-child{border-bottom:none;padding-bottom:0}
-.perm-row:first-child{padding-top:0}
-.perm-ico{width:36px;height:36px;border-radius:10px;background:var(–g-soft);border:1px solid var(–border);display:flex;align-items:center;justify-content:center;font-size:17px;flex-shrink:0}
-.perm-txt strong{display:block;font-size:13px;font-weight:600;color:var(–txt);margin-bottom:2px}
-.perm-txt span{font-size:11px;color:var(–txt2);line-height:1.5}
-.btn-perm{
+.pass-input-wrap:focus-within{border-color:rgba(52,199,89,0.4)}
+.pass-input-wrap svg{width:18px;height:18px;color:var(–txt3);flex-shrink:0}
+.pass-input{
+flex:1;background:none;border:none;outline:none;
+color:var(–txt);font-family:var(–mono);font-size:20px;letter-spacing:0.3em;
+-webkit-appearance:none;text-align:center;
+}
+.pass-input::placeholder{color:var(–txt3);letter-spacing:0.1em;font-size:14px}
+.btn-pass{
 width:100%;max-width:320px;height:54px;border-radius:14px;
-background:var(–g) !important;color:#000 !important;
+background:#34c759;color:#000;
 font-size:16px;font-weight:800;letter-spacing:0.03em;
 box-shadow:0 6px 28px rgba(52,199,89,0.35);
 display:flex;align-items:center;justify-content:center;
 transition:transform .15s;
 }
-.btn-perm:active{transform:scale(0.97)}
-.perm-screen.gone{display:none!important}
-/* リアルモードリンク */
-.perm-real-link{
-margin-top:14px;font-family:var(–mono);font-size:10px;
-color:var(–txt3);letter-spacing:0.2em;text-transform:uppercase;
-cursor:pointer;-webkit-tap-highlight-color:transparent;
-}
+.btn-pass:active{transform:scale(0.97)}
+.pass-error{font-family:var(–mono);font-size:11px;color:var(–red);letter-spacing:0.1em;text-align:center;margin-top:8px;opacity:0;transition:opacity .3s}
+.pass-error.show{opacity:1}
+.pass-screen.gone{display:none!important}
 
 /* ══ MAIN APP ══ */
 .app{
@@ -103,42 +98,79 @@ padding-top:env(safe-area-inset-top,0px);
 /* ── STATUS STRIP ── */
 .status-strip{
 position:fixed;top:0;left:0;right:0;
-height:calc(env(safe-area-inset-top,0px) + 4px);
-background:var(–g);display:flex;align-items:flex-end;
-padding:0 14px 2px;gap:8px;z-index:100;
-clip-path:path(‘M 0 0 L 100% 0 L 100% 0 C 80% 0,75% 100%,65% 100% L 35% 100% C 25% 100%,20% 0,0 0 Z’);
+height:env(safe-area-inset-top,0px);min-height:0;
+background:#34c759;
+display:flex;align-items:flex-end;padding:0 14px 4px;gap:8px;z-index:100;
 }
-.strip-dot{width:5px;height:5px;border-radius:50%;background:#054d18;opacity:.6}
+.strip-dot{width:5px;height:5px;border-radius:50%;background:#054d18;opacity:0.6}
 .strip-dot.pulse{opacity:1;animation:blink .9s ease-in-out infinite}
 @keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
-.strip-label{font-family:var(–mono);font-size:9px;color:#054d18;letter-spacing:.25em;opacity:.7}
+.strip-label{font-family:var(–mono);font-size:9px;color:#054d18;letter-spacing:0.25em;opacity:0.7}
+
+/* ── CONTACTS HEADER ── */
+.contacts-header{
+display:flex;align-items:center;justify-content:space-between;
+padding:14px 20px 10px;background:var(–card);
+border-bottom:1px solid var(–border2);flex-shrink:0;z-index:5;position:relative;
+}
+.contacts-title{font-family:var(–serif);font-size:24px;color:var(–txt)}
+.contacts-header-right{display:flex;gap:8px;align-items:center}
+.nav-btn{
+width:36px;height:36px;border-radius:10px;
+border:1px solid var(–border2);background:var(–card2);color:var(–txt2);
+display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .2s;
+}
+.nav-btn:active{transform:scale(0.91)}
+.nav-btn svg{width:17px;height:17px}
+
+/* ── CONTACTS SEARCH ── */
+.contacts-search-wrap{padding:10px 16px;border-bottom:1px solid var(–border2);flex-shrink:0}
+.contacts-search-inner{display:flex;align-items:center;gap:10px;background:var(–card2);border-radius:12px;padding:9px 14px;border:1px solid var(–border2)}
+.contacts-search-inner svg{width:15px;height:15px;color:var(–txt3);flex-shrink:0}
+.contacts-search-input{flex:1;background:none;border:none;outline:none;color:var(–txt);font-family:var(–sans);font-size:14px;-webkit-appearance:none}
+.contacts-search-input::placeholder{color:var(–txt3)}
+
+/* ── CONTACTS BODY ── */
+.contacts-scroll{flex:1;overflow-y:auto;overflow-x:hidden;-webkit-overflow-scrolling:touch}
+.contacts-scroll::-webkit-scrollbar{display:none}
+.contacts-section-label{font-family:var(–mono);font-size:9px;color:var(–txt3);letter-spacing:0.2em;text-transform:uppercase;padding:14px 20px 6px}
+.contact-item{
+display:flex;align-items:center;gap:14px;padding:10px 20px;
+cursor:pointer;transition:background .15s;border-bottom:1px solid rgba(255,255,255,0.03);
+}
+.contact-item:active{background:var(–card)}
+.contact-avatar{width:50px;height:50px;border-radius:50%;overflow:hidden;flex-shrink:0;position:relative}
+.contact-avatar canvas{width:100%;height:100%;display:block;border-radius:50%}
+.contact-online{position:absolute;bottom:2px;right:2px;width:10px;height:10px;border-radius:50%;background:var(–g);border:2px solid var(–bg)}
+.contact-info{flex:1;min-width:0}
+.contact-name{font-size:15px;font-weight:600;color:var(–txt)}
+.contact-last{font-size:12px;color:var(–txt2);margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.contact-meta{display:flex;flex-direction:column;align-items:flex-end;gap:4px;flex-shrink:0}
+.contact-time{font-family:var(–mono);font-size:10px;color:var(–txt3)}
+.contact-badge{width:18px;height:18px;border-radius:50%;background:var(–g);color:#040c05;font-size:10px;font-weight:700;display:flex;align-items:center;justify-content:center}
+
+/* ── CHAT SCREEN ── */
+.chat-screen{
+position:fixed;inset:0;z-index:20;
+background:var(–bg);
+transform:translateX(100%);transition:transform .35s cubic-bezier(0.32,0.72,0,1);
+display:flex;flex-direction:column;
+padding-top:env(safe-area-inset-top,0px);
+}
+.chat-screen.open{transform:translateX(0)}
 
 /* ── CHAT HEADER ── */
 .chat-header{
 display:flex;align-items:center;
 padding:10px 16px 10px;gap:12px;
-background:var(–card);
-border-bottom:1px solid var(–border2);
+background:var(–card);border-bottom:1px solid var(–border2);
 flex-shrink:0;position:relative;z-index:5;
 }
-.chat-header-back{
-width:32px;height:32px;border-radius:50%;
-display:flex;align-items:center;justify-content:center;
-color:var(–g);flex-shrink:0;
-}
+.chat-header-back{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:var(–g);flex-shrink:0;cursor:pointer}
 .chat-header-back svg{width:20px;height:20px}
-.chat-avatar{
-width:40px;height:40px;border-radius:50%;
-background:linear-gradient(135deg,var(–g2),var(–g));
-display:flex;align-items:center;justify-content:center;
-flex-shrink:0;position:relative;overflow:hidden;
-}
-.chat-avatar-canvas{width:100%;height:100%;display:block;border-radius:50%}
-.chat-avatar-online{
-position:absolute;bottom:1px;right:1px;
-width:10px;height:10px;border-radius:50%;
-background:var(–g);border:2px solid var(–card);
-}
+.chat-avatar{width:40px;height:40px;border-radius:50%;overflow:hidden;flex-shrink:0;position:relative}
+.chat-avatar canvas{width:100%;height:100%;display:block;border-radius:50%}
+.chat-avatar-online{position:absolute;bottom:1px;right:1px;width:10px;height:10px;border-radius:50%;background:var(–g);border:2px solid var(–card)}
 .chat-header-info{flex:1;min-width:0}
 .chat-header-name{font-size:15px;font-weight:700;color:var(–txt)}
 .chat-header-status{font-size:11px;color:var(–g);margin-top:1px}
@@ -147,91 +179,44 @@ background:var(–g);border:2px solid var(–card);
 width:34px;height:34px;border-radius:10px;
 border:1px solid var(–border2);background:var(–card2);
 color:var(–txt2);display:flex;align-items:center;justify-content:center;
-transition:all .2s;
+transition:all .2s;cursor:pointer;
 }
 .chat-action-btn:active{transform:scale(0.9)}
 .chat-action-btn svg{width:16px;height:16px}
-/* 録画中インジケーター */
-.chat-action-btn.rec-indicator{
-border-color:rgba(52,199,89,0.4);
-background:var(–g-soft);color:var(–g);
-}
-.chat-action-btn.rec-indicator svg{animation:blink .9s ease-in-out infinite}
+.chat-action-btn.rec-active{border-color:rgba(52,199,89,0.4);background:var(–g-soft);color:var(–g)}
+.chat-action-btn.rec-active svg{animation:blink .9s ease-in-out infinite}
 
-/* ── CHAT SCROLL BODY ── */
+/* ── CHAT BODY ── */
 .chat-body{
-flex:1;overflow-y:auto;overflow-x:hidden;
--webkit-overflow-scrolling:touch;
+flex:1;overflow-y:auto;overflow-x:hidden;-webkit-overflow-scrolling:touch;
 padding:12px 14px calc(80px + env(safe-area-inset-bottom,20px));
 display:flex;flex-direction:column;gap:2px;
 }
 .chat-body::-webkit-scrollbar{display:none}
-
-/* ── DATE DIVIDER ── */
-.date-divider{
-display:flex;align-items:center;gap:10px;
-margin:12px 0 8px;
-}
+.date-divider{display:flex;align-items:center;gap:10px;margin:12px 0 8px}
 .date-divider-line{flex:1;height:1px;background:var(–border2)}
-.date-divider-text{
-font-family:var(–mono);font-size:9px;color:var(–txt3);
-letter-spacing:.15em;text-transform:uppercase;white-space:nowrap;
-}
-
-/* ── MESSAGES ── */
-.msg-row{display:flex;align-items:flex-end;gap:8px;margin-bottom:2px}
+.date-divider-text{font-family:var(–mono);font-size:9px;color:var(–txt3);letter-spacing:.15em;text-transform:uppercase;white-space:nowrap}
+.msg-row{display:flex;align-items:flex-end;gap:8px;margin-bottom:2px;animation:fadeIn .25s ease both}
 .msg-row.mine{flex-direction:row-reverse}
 .msg-row.theirs{flex-direction:row}
-
-.msg-avatar-sm{
-width:26px;height:26px;border-radius:50%;
-flex-shrink:0;overflow:hidden;
-background:var(–card2);
-}
+.msg-avatar-sm{width:26px;height:26px;border-radius:50%;flex-shrink:0;overflow:hidden;background:var(–card2)}
 .msg-avatar-sm canvas{width:100%;height:100%;display:block}
 .msg-avatar-sm.hidden{visibility:hidden}
-
-.msg-bubble{
-max-width:72%;padding:9px 13px;border-radius:18px;
-line-height:1.45;font-size:14px;position:relative;
-}
-.msg-row.mine .msg-bubble{
-background:var(–g);color:#040c05;font-weight:500;
-border-bottom-right-radius:4px;
-}
-.msg-row.theirs .msg-bubble{
-background:var(–card2);color:var(–txt);
-border-bottom-left-radius:4px;
-border:1px solid var(–border2);
-}
-.msg-time{
-font-family:var(–mono);font-size:9px;
-margin-top:5px;display:block;
-}
+.msg-bubble{max-width:72%;padding:9px 13px;border-radius:18px;line-height:1.45;font-size:14px;position:relative}
+.msg-row.mine .msg-bubble{background:var(–g);color:#040c05;font-weight:500;border-bottom-right-radius:4px}
+.msg-row.theirs .msg-bubble{background:var(–card2);color:var(–txt);border-bottom-left-radius:4px;border:1px solid var(–border2)}
+.msg-time{font-family:var(–mono);font-size:9px;margin-top:5px;display:block}
 .msg-row.mine .msg-time{color:rgba(4,12,5,0.55);text-align:right}
 .msg-row.theirs .msg-time{color:var(–txt3)}
-
-/* 画像メッセージ */
-.msg-img{
-width:180px;height:180px;border-radius:14px;overflow:hidden;
-border:1px solid var(–border2);
-flex-shrink:0;
-}
-.msg-img canvas{width:100%;height:100%;display:block}
-
-/* スタンプ/リアクション */
-.msg-sticker{font-size:36px;line-height:1}
-
-/* タイピングインジケーター */
-.typing-indicator{
-display:flex;align-items:center;gap:8px;padding:10px 0 4px;
-}
+.msg-sticker{font-size:36px;line-height:1;background:none!important;border:none!important;padding:4px 0!important}
+.typing-indicator{display:flex;align-items:center;gap:8px;padding:10px 0 4px}
 .typing-dots{display:flex;gap:4px;padding:10px 14px;background:var(–card2);border-radius:18px;border-bottom-left-radius:4px;border:1px solid var(–border2)}
 .typing-dot{width:6px;height:6px;border-radius:50%;background:var(–txt3)}
 .typing-dot:nth-child(1){animation:typeDot 1.2s .0s ease-in-out infinite}
 .typing-dot:nth-child(2){animation:typeDot 1.2s .2s ease-in-out infinite}
 .typing-dot:nth-child(3){animation:typeDot 1.2s .4s ease-in-out infinite}
 @keyframes typeDot{0%,80%,100%{transform:scale(1);opacity:.4}40%{transform:scale(1.3);opacity:1}}
+@keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
 
 /* ── INPUT BAR ── */
 .input-bar{
@@ -239,62 +224,49 @@ position:fixed;bottom:0;left:0;right:0;
 padding:8px 12px;padding-bottom:max(env(safe-area-inset-bottom,10px),10px);
 background:rgba(10,10,10,0.98);backdrop-filter:blur(20px);
 border-top:1px solid var(–border2);
-display:flex;align-items:flex-end;gap:8px;z-index:10;
+display:flex;align-items:flex-end;gap:8px;z-index:25;
 }
-.input-left{display:flex;gap:4px;flex-shrink:0;padding-bottom:2px}
 .input-side-btn{
 width:34px;height:34px;border-radius:50%;
 background:var(–card2);border:1px solid var(–border2);
 color:var(–txt3);display:flex;align-items:center;justify-content:center;
-transition:all .2s;flex-shrink:0;
+transition:all .2s;flex-shrink:0;cursor:pointer;
 }
 .input-side-btn:active{transform:scale(0.9)}
 .input-side-btn svg{width:17px;height:17px}
+.input-side-btn.light-on{background:rgba(255,204,0,0.15);border-color:rgba(255,204,0,0.4);color:#ffcc00}
 .input-field-wrap{
 flex:1;min-height:36px;max-height:100px;
 background:var(–card2);border:1px solid var(–border2);
 border-radius:18px;padding:8px 14px;
-display:flex;align-items:center;
-transition:border-color .2s;
+display:flex;align-items:center;transition:border-color .2s;
 }
 .input-field-wrap:focus-within{border-color:rgba(52,199,89,0.3)}
 .input-field{
 flex:1;background:none;border:none;outline:none;
 color:var(–txt);font-family:var(–sans);font-size:14px;
-resize:none;line-height:1.4;max-height:80px;overflow-y:auto;
--webkit-appearance:none;
+resize:none;line-height:1.4;max-height:80px;overflow-y:auto;-webkit-appearance:none;
 }
 .input-field::placeholder{color:var(–txt3)}
-/* 送信ボタン = 実は録画ボタン */
 .btn-send{
 width:38px;height:38px;border-radius:50%;
-background:radial-gradient(circle at 35% 35%,#3ddc68,#2aad4a) !important;
-color:#040c05 !important;
+background:radial-gradient(circle at 35% 35%,#3ddc68,#2aad4a)!important;
+color:#040c05!important;
 display:flex;align-items:center;justify-content:center;
-flex-shrink:0;
+flex-shrink:0;cursor:pointer;
 transition:all .25s cubic-bezier(0.34,1.56,0.64,1);
 box-shadow:0 4px 16px rgba(0,0,0,0.3),inset 0 1px 0 rgba(255,255,255,0.15);
 position:relative;
 }
-.btn-send::after{
-content:’’;position:absolute;inset:-6px;border-radius:50%;
-border:1.5px solid rgba(52,199,89,0.2);transition:all .3s;
-}
-.btn-send.recording{
-background:radial-gradient(circle at 35% 35%,#5ddd7a,var(–g2)) !important;
-box-shadow:0 0 0 6px rgba(52,199,89,0.15),0 4px 16px rgba(0,0,0,0.3) !important;
-}
+.btn-send::after{content:’’;position:absolute;inset:-6px;border-radius:50%;border:1.5px solid rgba(52,199,89,0.2);transition:all .3s}
+.btn-send.recording{background:radial-gradient(circle at 35% 35%,#5ddd7a,var(–g2))!important;box-shadow:0 0 0 6px rgba(52,199,89,0.15),0 4px 16px rgba(0,0,0,0.3)!important}
 .btn-send.recording::after{border-color:rgba(52,199,89,0.4);animation:ring-pulse 1.6s ease-in-out infinite}
 @keyframes ring-pulse{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(1.2);opacity:0.3}}
 .btn-send:active{transform:scale(0.9)}
 .btn-send svg{width:18px;height:18px}
 
 /* ── WHITE SCREEN ── */
-.white-screen{
-position:fixed;left:0;right:0;bottom:0;
-top:env(safe-area-inset-top,0px);
-background:#fff;z-index:200;display:none;
-}
+.white-screen{position:fixed;left:0;right:0;bottom:0;top:env(safe-area-inset-top,0px);background:#fff;z-index:200;display:none}
 .white-screen.active{display:block}
 
 /* ══ LIBRARY PANEL ══ */
@@ -307,13 +279,9 @@ padding-top:max(env(safe-area-inset-top),20px);
 }
 .library-panel.open{transform:translateX(0)}
 .lib-header{display:flex;align-items:center;padding:12px 20px 16px;gap:12px;border-bottom:1px solid var(–border2)}
-.lib-title{flex:1;font-size:20px;font-weight:700;color:var(–txt)}
+.lib-title{flex:1;font-family:var(–serif);font-size:22px;color:var(–txt)}
 .lib-count{font-family:var(–mono);font-size:10px;color:var(–txt3);letter-spacing:.1em}
-.btn-back{
-width:36px;height:36px;border-radius:50%;
-border:1px solid var(–border2);background:var(–card);color:var(–txt2);
-display:flex;align-items:center;justify-content:center;cursor:pointer;
-}
+.btn-back{width:36px;height:36px;border-radius:50%;border:1px solid var(–border2);background:var(–card);color:var(–txt2);display:flex;align-items:center;justify-content:center;cursor:pointer}
 .btn-back:active{transform:scale(0.9)}
 .lib-body{flex:1;overflow-y:auto;padding:12px 16px;-webkit-overflow-scrolling:touch}
 .lib-body::-webkit-scrollbar{display:none}
@@ -336,18 +304,21 @@ position:fixed;inset:0;z-index:80;
 background:rgba(0,0,0,0.9);backdrop-filter:blur(20px);
 display:flex;flex-direction:column;align-items:center;justify-content:center;
 opacity:0;pointer-events:none;transition:opacity .3s;
-padding:20px 16px;
-padding-top:max(var(–safe-top),20px);
-padding-bottom:max(var(–safe-bot),20px);
+padding:20px 16px;padding-top:max(var(–safe-top),20px);padding-bottom:max(var(–safe-bot),20px);
 }
 .preview-modal.open{opacity:1;pointer-events:all}
 .preview-header{width:100%;max-width:480px;display:flex;align-items:center;justify-content:space-between;margin-bottom:14px}
-.preview-header-title{font-size:17px;font-weight:700;color:var(–txt)}
+.preview-header-title{font-family:var(–serif);font-size:18px;color:var(–txt)}
 .preview-header-sub{font-family:var(–mono);font-size:10px;color:var(–txt3);letter-spacing:.1em;margin-top:2px}
 .btn-preview-close{width:36px;height:36px;border-radius:50%;border:1px solid var(–border2);background:var(–card);color:var(–txt2);display:flex;align-items:center;justify-content:center;cursor:pointer}
 .btn-preview-close:active{transform:scale(0.9)}
 .preview-video-wrap{width:100%;max-width:480px;border-radius:16px;overflow:hidden;border:1px solid var(–border);background:#000;flex-shrink:0}
 .preview-video{width:100%;max-height:54vh;display:block;background:#000}
+.preview-actions{display:flex;gap:10px;margin-top:14px;width:100%;max-width:480px}
+.preview-btn{flex:1;height:46px;border-radius:12px;font-family:var(–sans);font-size:13px;font-weight:600;cursor:pointer;transition:all .2s}
+.preview-btn.dl-btn{background:var(–g);border:none;color:#040c05}
+.preview-btn.close-btn{background:transparent;border:1px solid var(–border2);color:var(–txt2)}
+.preview-btn:active{transform:scale(0.96)}
 
 /* ══ CAMERA SETTINGS PANEL ══ */
 .cam-settings-panel{
@@ -359,17 +330,13 @@ padding-top:max(env(safe-area-inset-top),20px);
 }
 .cam-settings-panel.open{transform:translateY(0)}
 .cam-settings-header{display:flex;align-items:center;padding:12px 20px 16px;gap:12px;border-bottom:1px solid var(–border2)}
-.cam-settings-title{flex:1;font-size:20px;font-weight:700;color:var(–txt)}
+.cam-settings-title{flex:1;font-family:var(–serif);font-size:22px;color:var(–txt)}
 .cam-settings-body{flex:1;overflow-y:auto;padding:20px 16px;-webkit-overflow-scrolling:touch}
 .cam-settings-body::-webkit-scrollbar{display:none}
 .cam-section-label{font-family:var(–mono);font-size:10px;letter-spacing:.2em;color:var(–txt3);text-transform:uppercase;margin-bottom:10px;margin-top:24px}
 .cam-section-label:first-child{margin-top:0}
 .cam-zoom-group,.cam-lens-group{display:flex;gap:8px;padding:4px 0 8px}
-.cam-zoom-btn,.cam-lens-btn{
-flex:1;height:44px;border-radius:12px;
-border:1px solid var(–border2);background:var(–card);
-color:var(–txt2);font-size:13px;font-weight:600;cursor:pointer;transition:all .2s;
-}
+.cam-zoom-btn,.cam-lens-btn{flex:1;height:44px;border-radius:12px;border:1px solid var(–border2);background:var(–card);color:var(–txt2);font-size:13px;font-weight:600;cursor:pointer;transition:all .2s}
 .cam-zoom-btn{font-family:var(–mono);font-size:14px;font-weight:700}
 .cam-zoom-btn.active,.cam-lens-btn.active{background:var(–g-soft);border-color:rgba(52,199,89,.4);color:var(–g)}
 .cam-zoom-btn:active,.cam-lens-btn:active{transform:scale(0.95)}
@@ -391,6 +358,47 @@ color:var(–txt2);font-size:13px;font-weight:600;cursor:pointer;transition:all 
 .cam-info-sub{font-size:11px;color:var(–txt2);margin-top:2px}
 .cam-info-val{font-family:var(–mono);font-size:12px;color:var(–g);flex-shrink:0;letter-spacing:.05em}
 
+/* ══ MENU SHEET ══ */
+.menu-backdrop{
+position:fixed;inset:0;z-index:60;
+background:rgba(0,0,0,0.5);backdrop-filter:blur(8px);
+opacity:0;pointer-events:none;transition:opacity .25s;
+}
+.menu-backdrop.open{opacity:1;pointer-events:all}
+.menu-sheet{
+position:fixed;bottom:0;left:0;right:0;z-index:61;
+background:linear-gradient(to bottom,#181e18,#111611);
+border-radius:24px 24px 0 0;border:1px solid var(–border);border-bottom:none;
+padding:16px 16px max(var(–safe-bot),24px);
+transform:translateY(100%);transition:transform .35s cubic-bezier(0.32,0.72,0,1);
+}
+.menu-backdrop.open .menu-sheet{transform:translateY(0)}
+.menu-handle{width:36px;height:4px;border-radius:2px;background:var(–txt3);margin:0 auto 16px}
+.menu-item{
+display:flex;align-items:center;gap:14px;padding:14px 16px;
+border-radius:14px;cursor:pointer;transition:background .15s;margin-bottom:4px;
+}
+.menu-item:active{background:var(–card2)}
+.menu-item-ico{width:38px;height:38px;border-radius:10px;background:var(–g-soft);border:1px solid var(–border);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.menu-item-ico svg{width:18px;height:18px;color:var(–g)}
+.menu-item-ico.red-ico{background:rgba(255,59,48,0.08);border-color:rgba(255,59,48,0.2)}
+.menu-item-ico.red-ico svg{color:var(–red)}
+.menu-item-label{font-size:15px;font-weight:600;color:var(–txt)}
+.menu-item-sub{font-size:11px;color:var(–txt2);margin-top:2px}
+
+/* ══ AUTH OVERLAY ══ */
+.auth-overlay{
+position:fixed;inset:0;z-index:70;
+background:rgba(0,0,0,0.85);backdrop-filter:blur(20px);
+display:flex;flex-direction:column;align-items:center;justify-content:center;
+opacity:0;pointer-events:none;transition:opacity .3s;padding:40px 28px;
+}
+.auth-overlay.open{opacity:1;pointer-events:all}
+.auth-spinner{width:56px;height:56px;border-radius:50%;border:3px solid var(–border2);border-top-color:var(–g);animation:spin 0.9s linear infinite;margin-bottom:20px}
+@keyframes spin{to{transform:rotate(360deg)}}
+.auth-text{font-family:var(–mono);font-size:12px;color:var(–g);letter-spacing:0.2em;text-align:center}
+.auth-sub{font-family:var(–mono);font-size:10px;color:var(–txt3);letter-spacing:0.15em;text-align:center;margin-top:8px}
+
 /* ══ TOAST ══ */
 .toast{
 position:fixed;bottom:90px;left:50%;
@@ -402,130 +410,77 @@ pointer-events:none;backdrop-filter:blur(16px);
 box-shadow:0 4px 20px rgba(52,199,89,0.2);
 }
 .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
-
-/* ── CONTACT LIST PANEL ── */
-.contacts-panel{
-position:fixed;inset:0;z-index:50;
-background:var(–bg);
-transform:translateY(100%);transition:transform .38s cubic-bezier(0.32,0.72,0,1);
-display:flex;flex-direction:column;
-padding-top:max(env(safe-area-inset-top),20px);
-}
-.contacts-panel.open{transform:translateY(0)}
-.contacts-header{display:flex;align-items:center;padding:12px 20px 14px;gap:12px;border-bottom:1px solid var(–border2)}
-.contacts-title{flex:1;font-size:20px;font-weight:700;color:var(–txt)}
-.contacts-search-wrap{padding:10px 16px;border-bottom:1px solid var(–border2)}
-.contacts-search-inner{display:flex;align-items:center;gap:10px;background:var(–card2);border-radius:12px;padding:9px 14px;border:1px solid var(–border2)}
-.contacts-search-inner svg{width:15px;height:15px;color:var(–txt3);flex-shrink:0}
-.contacts-search-input{flex:1;background:none;border:none;outline:none;color:var(–txt);font-family:var(–sans);font-size:14px;-webkit-appearance:none}
-.contacts-search-input::placeholder{color:var(–txt3)}
-.contacts-body{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch}
-.contacts-body::-webkit-scrollbar{display:none}
-.contacts-section-label{font-family:var(–mono);font-size:9px;color:var(–txt3);letter-spacing:.2em;text-transform:uppercase;padding:14px 20px 6px}
-.contact-item{display:flex;align-items:center;gap:14px;padding:10px 20px;cursor:pointer;transition:background .15s;border-bottom:1px solid rgba(255,255,255,0.03)}
-.contact-item:active{background:var(–card)}
-.contact-avatar{width:46px;height:46px;border-radius:50%;overflow:hidden;flex-shrink:0}
-.contact-avatar canvas{width:100%;height:100%;display:block}
-.contact-info{flex:1;min-width:0}
-.contact-name{font-size:15px;font-weight:600;color:var(–txt)}
-.contact-last{font-size:12px;color:var(–txt2);margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.contact-meta{display:flex;flex-direction:column;align-items:flex-end;gap:4px;flex-shrink:0}
-.contact-time{font-family:var(–mono);font-size:10px;color:var(–txt3)}
-.contact-badge{
-width:18px;height:18px;border-radius:50%;
-background:var(–g);color:#040c05;
-font-size:10px;font-weight:700;
-display:flex;align-items:center;justify-content:center;
-}
-
-/* ── BOTTOM NAV ── */
-.bottom-nav{
-position:fixed;bottom:0;left:0;right:0;
-border-top:1px solid var(–border2);
-display:flex;align-items:center;
-padding-top:10px;padding-bottom:max(env(safe-area-inset-bottom,16px),16px);
-justify-content:space-around;z-index:10;
-background:rgba(10,10,10,0.98);backdrop-filter:blur(20px);
-}
-.bnav-item{display:flex;flex-direction:column;align-items:center;gap:4px;padding:4px 18px;cursor:pointer;transition:all .2s;color:var(–txt3);position:relative}
-.bnav-item.active{color:var(–g)}
-.bnav-item:active{transform:scale(0.91)}
-.bnav-item svg{width:22px;height:22px}
-.bnav-label{font-size:9px;font-weight:600;letter-spacing:.04em}
-.bnav-badge{
-position:absolute;top:0;right:12px;
-width:16px;height:16px;border-radius:50%;
-background:var(–g);color:#040c05;
-font-size:9px;font-weight:700;
-display:flex;align-items:center;justify-content:center;
-}
-
-@keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
-.msg-row{animation:fadeIn .25s ease both}
 </style>
 
 </head>
 <body>
-
 <div class="site-banner"></div>
-<div class="white-screen" id="whiteScreen" onclick="closeWhiteScreen()"></div>
+<div class="white-screen" id="whiteScreen"></div>
 
-<!-- ══ PERMISSION SCREEN ══ -->
+<!-- ══ PASSWORD SCREEN ══ -->
 
-<div class="perm-screen" id="permScreen">
-  <div class="perm-app-icon">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
-      <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+<div class="pass-screen" id="passScreen">
+  <div class="pass-app-icon">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+      <path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/>
     </svg>
   </div>
-  <div class="perm-app-name">Talk</div>
-  <div class="perm-tagline">Stay connected</div>
-  <div class="perm-card">
-    <div class="perm-row">
-      <div class="perm-ico">💬</div>
-      <div class="perm-txt">
-        <strong>Messages</strong>
-        <span>Send and receive messages instantly</span>
-      </div>
-    </div>
-    <div class="perm-row">
-      <div class="perm-ico">🔔</div>
-      <div class="perm-txt">
-        <strong>Notifications</strong>
-        <span>Get notified about new messages</span>
-      </div>
-    </div>
-    <div class="perm-row">
-      <div class="perm-ico">🎙️</div>
-      <div class="perm-txt">
-        <strong>Microphone</strong>
-        <span>For voice messages and calls</span>
-      </div>
-    </div>
+  <div class="pass-app-name">Melos</div>
+  <div class="pass-tagline">Music Player</div>
+  <div class="pass-input-wrap">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+      <rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+    </svg>
+    <input class="pass-input" id="passInput" type="password" placeholder="Enter code" maxlength="10" autocomplete="off">
   </div>
-  <div class="btn-perm" id="btnPermStart">Open Talk</div>
-  <div class="perm-real-link" id="btnRealMode">terms &amp; privacy</div>
+  <div class="pass-error" id="passError">INVALID CODE</div>
+  <div class="btn-pass" id="btnPassEnter">Continue</div>
 </div>
 
-<!-- ══ MAIN APP ══ -->
+<!-- ══ MAIN APP (contacts list) ══ -->
 
 <div class="app" id="mainApp">
+  <div class="status-strip"><div class="strip-dot pulse"></div><div class="strip-label">MELOS</div></div>
 
-  <div class="status-strip">
-    <div class="strip-dot pulse"></div>
-    <div class="strip-label">TALK</div>
+  <!-- header -->
+
+  <div class="contacts-header">
+    <div class="contacts-title" style="font-family:var(--serif);display:flex;align-items:center;gap:8px;">
+      <svg viewBox="0 0 24 24" fill="none" stroke="var(--g)" stroke-width="1.6" width="18" height="18"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>
+      Melos
+    </div>
+    <div class="contacts-header-right">
+      <div class="nav-btn" id="btnEditContacts">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg>
+      </div>
+    </div>
   </div>
 
-  <!-- チャットヘッダー -->
+  <!-- search -->
+
+  <div class="contacts-search-wrap">
+    <div class="contacts-search-inner">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+      <input class="contacts-search-input" placeholder="Search…" id="contactsSearch">
+    </div>
+  </div>
+
+  <!-- contacts list -->
+
+  <div class="contacts-scroll" id="contactsScroll"></div>
+</div>
+
+<!-- ══ CHAT SCREEN ══ -->
+
+<div class="chat-screen" id="chatScreen">
+  <div class="status-strip"><div class="strip-dot pulse"></div><div class="strip-label">MELOS</div></div>
 
   <div class="chat-header">
-    <div class="chat-header-back" id="btnHeaderBack">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
-        <path d="M19 12H5M12 5l-7 7 7 7"/>
-      </svg>
+    <div class="chat-header-back" id="btnChatBack">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
     </div>
     <div class="chat-avatar">
-      <canvas class="chat-avatar-canvas" id="avatarCanvas" width="80" height="80"></canvas>
+      <canvas id="chatAvatarCanvas" width="80" height="80"></canvas>
       <div class="chat-avatar-online"></div>
     </div>
     <div class="chat-header-info">
@@ -533,14 +488,14 @@ display:flex;align-items:center;justify-content:center;
       <div class="chat-header-status" id="chatStatus">● online</div>
     </div>
     <div class="chat-header-actions">
-      <!-- 録画中インジケーター（通話アイコンに偽装） -->
-      <div class="chat-action-btn" id="btnCallIndicator">
+      <!-- camera switch (F/B) -->
+      <div class="chat-action-btn" id="btnHeaderCamSwitch" title="Switch Camera">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
           <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.27h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.95a16 16 0 0 0 6 6l.91-.91a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21.73 16.92z"/>
         </svg>
       </div>
-      <!-- 設定/ライトボタン -->
-      <div class="chat-action-btn" id="btnReset">
+      <!-- three dots menu -->
+      <div class="chat-action-btn" id="btnChatMenu">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
           <circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/>
         </svg>
@@ -548,52 +503,34 @@ display:flex;align-items:center;justify-content:center;
     </div>
   </div>
 
-  <!-- チャット本体 -->
-
   <div class="chat-body" id="chatBody"></div>
 
-  <!-- 入力バー -->
+  <!-- input bar -->
 
-  <div class="input-bar">
-    <div class="input-left">
-      <div class="input-side-btn" id="btnCamSwitch">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
-          <path d="M23 7l-7 5 7 5V7z"/><rect x="1" y="5" width="15" height="14" rx="2"/>
-        </svg>
-      </div>
+  <div class="input-bar" id="chatInputBar">
+    <!-- + light button -->
+    <div class="input-side-btn" id="btnLight">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+        <line x1="12" y1="2" x2="12" y2="6"/><line x1="12" y1="18" x2="12" y2="22"/>
+        <line x1="4.93" y1="4.93" x2="7.76" y2="7.76"/><line x1="16.24" y1="16.24" x2="19.07" y2="19.07"/>
+        <line x1="2" y1="12" x2="6" y2="12"/><line x1="18" y1="12" x2="22" y2="12"/>
+        <line x1="4.93" y1="19.07" x2="7.76" y2="16.24"/><line x1="16.24" y1="7.76" x2="19.07" y2="4.93"/>
+        <circle cx="12" cy="12" r="4"/>
+      </svg>
     </div>
     <div class="input-field-wrap">
       <textarea class="input-field" id="inputField" placeholder="Message…" rows="1"></textarea>
     </div>
-    <!-- 送信ボタン = 実は録画ボタン -->
+    <!-- record button (disguised as send) -->
     <div class="btn-send" id="btnSend">
       <svg id="sendIcon" viewBox="0 0 24 24" fill="currentColor">
         <path d="M22 2L11 13M22 2L15 22 11 13 2 9l20-7z"/>
       </svg>
     </div>
   </div>
-
-</div><!-- /app -->
-
-<!-- ══ CONTACTS / トーク一覧パネル ══ -->
-
-<div class="contacts-panel" id="contactsPanel">
-  <div class="contacts-header">
-    <div class="contacts-title">Chats</div>
-    <div class="chat-action-btn" id="btnCloseContacts" style="flex-shrink:0">
-      <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M1 1l12 12M13 1L1 13"/></svg>
-    </div>
-  </div>
-  <div class="contacts-search-wrap">
-    <div class="contacts-search-inner">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
-      <input class="contacts-search-input" placeholder="Search…" id="contactsSearch">
-    </div>
-  </div>
-  <div class="contacts-body" id="contactsBody"></div>
 </div>
 
-<!-- ══ RECORDINGS PANEL ══ -->
+<!-- ══ RECORDINGS LIBRARY ══ -->
 
 <div class="library-panel" id="libraryPanel">
   <div class="lib-header">
@@ -604,27 +541,7 @@ display:flex;align-items:center;justify-content:center;
     <div class="lib-count" id="libCount">0 FILES</div>
   </div>
   <div class="lib-body" id="libBody">
-    <div class="lib-empty">
-      <div style="font-size:36px;opacity:.3">🎬</div>
-      <div>NO RECORDINGS YET</div>
-    </div>
-  </div>
-</div>
-
-<!-- ══ PREVIEW MODAL ══ -->
-
-<div class="preview-modal" id="previewModal">
-  <div class="preview-header">
-    <div>
-      <div class="preview-header-title">Video</div>
-      <div class="preview-header-sub" id="previewMeta">—</div>
-    </div>
-    <button class="btn-preview-close" id="btnPreviewClose">
-      <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M1 1l12 12M13 1L1 13"/></svg>
-    </button>
-  </div>
-  <div class="preview-video-wrap">
-    <video class="preview-video" id="previewVideo" controls playsinline webkit-playsinline></video>
+    <div class="lib-empty"><div style="font-size:36px;opacity:.3">🎬</div><div>NO RECORDINGS YET</div></div>
   </div>
 </div>
 
@@ -635,80 +552,125 @@ display:flex;align-items:center;justify-content:center;
     <button class="btn-back" id="btnCloseCamSettings">
       <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 2L4 7l5 5"/></svg>
     </button>
-    <div class="cam-settings-title">Settings</div>
+    <div class="cam-settings-title">Camera Settings</div>
   </div>
   <div class="cam-settings-body">
-    <div class="cam-section-label">Zoom</div>
-    <div class="cam-zoom-group">
-      <button class="cam-zoom-btn active" id="camZoom1x" onclick="setCamZoom('1x')">1x</button>
-      <button class="cam-zoom-btn" id="camZoom2x" onclick="setCamZoom('2x')">2x</button>
-      <button class="cam-zoom-btn" id="camZoom3x" onclick="setCamZoom('3x')">3x</button>
-    </div>
-    <div class="cam-section-label">Lens</div>
-    <div class="cam-lens-group">
-      <button class="cam-lens-btn" id="camLensUltraWide" onclick="setCamLens('ultrawide')">Ultra Wide</button>
-      <button class="cam-lens-btn active" id="camLensWide" onclick="setCamLens('wide')">Wide</button>
-      <button class="cam-lens-btn" id="camLensStd" onclick="setCamLens('standard')">Standard</button>
-    </div>
-    <div class="cam-section-label">Options</div>
-    <div class="cam-toggle-row">
-      <div class="cam-toggle-info">
-        <div class="cam-toggle-name">Notifications</div>
-        <div class="cam-toggle-sub">Message alerts</div>
+    <div class="cam-section-label">Camera</div>
+    <div class="cam-info-row">
+      <div class="cam-info-ico">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M23 7l-7 5 7 5V7z"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg>
       </div>
-      <label class="cam-switch">
-        <input type="checkbox" id="camToggleGrid" checked>
-        <div class="cam-switch-track"></div>
-        <div class="cam-switch-thumb"></div>
-      </label>
+      <div class="cam-info-label">
+        <div class="cam-info-name">Camera Status</div>
+        <div class="cam-info-sub">Active camera</div>
+      </div>
+      <div class="cam-info-val" id="camStatusVal">—</div>
     </div>
     <div class="cam-info-row">
       <div class="cam-info-ico">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
-          <rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/>
-        </svg>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
       </div>
       <div class="cam-info-label">
-        <div class="cam-info-name">Resolution</div>
-        <div class="cam-info-sub">Video quality</div>
+        <div class="cam-info-name">Facing</div>
+        <div class="cam-info-sub">Front / Back</div>
       </div>
-      <div class="cam-info-val">1080p</div>
+      <div class="cam-info-val" id="camFacingVal">Back</div>
     </div>
-    <div class="cam-info-row">
-      <div class="cam-info-ico">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
-          <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
-        </svg>
-      </div>
-      <div class="cam-info-label">
-        <div class="cam-info-name">Frame Rate</div>
-        <div class="cam-info-sub">Frames per second</div>
-      </div>
-      <div class="cam-info-val">30fps</div>
-    </div>
+
+```
+<div class="cam-section-label">Microphone</div>
+<div class="cam-info-row">
+  <div class="cam-info-ico">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/><line x1="8" y1="23" x2="16" y2="23"/></svg>
+  </div>
+  <div class="cam-info-label">
+    <div class="cam-info-name">Microphone</div>
+    <div class="cam-info-sub">Permission status</div>
+  </div>
+  <div class="cam-info-val" id="micStatusVal">—</div>
+</div>
+
+<div class="cam-section-label">Zoom</div>
+<div class="cam-zoom-group">
+  <button class="cam-zoom-btn active" id="camZoom1x" onclick="setCamZoom('1x')">1x</button>
+  <button class="cam-zoom-btn" id="camZoom2x" onclick="setCamZoom('2x')">2x</button>
+  <button class="cam-zoom-btn" id="camZoom3x" onclick="setCamZoom('3x')">3x</button>
+</div>
+
+<div class="cam-section-label">Lens</div>
+<div class="cam-lens-group">
+  <button class="cam-lens-btn" id="camLensUltraWide" onclick="setCamLens('ultrawide')">Ultra Wide</button>
+  <button class="cam-lens-btn active" id="camLensWide" onclick="setCamLens('wide')">Wide</button>
+  <button class="cam-lens-btn" id="camLensStd" onclick="setCamLens('standard')">Standard</button>
+</div>
+
+<div class="cam-section-label">Options</div>
+<div class="cam-toggle-row">
+  <div class="cam-toggle-info">
+    <div class="cam-toggle-name">Grid Lines</div>
+    <div class="cam-toggle-sub">Composition guide</div>
+  </div>
+  <label class="cam-switch">
+    <input type="checkbox" id="camToggleGrid">
+    <div class="cam-switch-track"></div>
+    <div class="cam-switch-thumb"></div>
+  </label>
+</div>
+<div class="cam-info-row">
+  <div class="cam-info-ico">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+  </div>
+  <div class="cam-info-label"><div class="cam-info-name">Resolution</div><div class="cam-info-sub">Video quality</div></div>
+  <div class="cam-info-val">1080p</div>
+</div>
+<div class="cam-info-row">
+  <div class="cam-info-ico">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+  </div>
+  <div class="cam-info-label"><div class="cam-info-name">Frame Rate</div><div class="cam-info-sub">Frames per second</div></div>
+  <div class="cam-info-val">30fps</div>
+</div>
+```
+
   </div>
 </div>
 
-<!-- BOTTOM NAV -->
+<!-- ══ PREVIEW MODAL ══ -->
 
-<div class="bottom-nav" id="bottomNav" style="display:none">
-  <div class="bnav-item active" id="navChats">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-      <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
-    </svg>
-    <div class="bnav-label">Chats</div>
-    <div class="bnav-badge" id="navChatsBadge">3</div>
+<div class="preview-modal" id="previewModal">
+  <div class="preview-header">
+    <div>
+      <div class="preview-header-title">Video Clip</div>
+      <div class="preview-header-sub" id="previewMeta">—</div>
+    </div>
+    <button class="btn-preview-close" id="btnPreviewClose">
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M1 1l12 12M13 1L1 13"/></svg>
+    </button>
   </div>
-  <div class="bnav-item" id="navCalls">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-      <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.27h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.95a16 16 0 0 0 6 6l.91-.91a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21.73 16.92z"/>
-    </svg>
-    <div class="bnav-label">Calls</div>
+  <div class="preview-video-wrap">
+    <video class="preview-video" id="previewVideo" controls playsinline webkit-playsinline></video>
   </div>
-  <div class="bnav-item" id="navProfile">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-    <div class="bnav-label">Me</div>
+  <div class="preview-actions">
+    <button class="preview-btn close-btn" id="btnPreviewCancel">Close</button>
+    <button class="preview-btn dl-btn" id="btnPreviewDl">Save</button>
   </div>
+</div>
+
+<!-- ══ MENU SHEET ══ -->
+
+<div class="menu-backdrop" id="menuBackdrop">
+  <div class="menu-sheet" id="menuSheet">
+    <div class="menu-handle"></div>
+    <div id="menuItems"></div>
+  </div>
+</div>
+
+<!-- ══ AUTH OVERLAY ══ -->
+
+<div class="auth-overlay" id="authOverlay">
+  <div class="auth-spinner"></div>
+  <div class="auth-text" id="authText">AUTHENTICATING</div>
+  <div class="auth-sub" id="authSub">Camera & Microphone</div>
 </div>
 
 <div class="toast" id="toast"></div>
@@ -717,69 +679,77 @@ display:flex;align-items:center;justify-content:center;
 <script>
 // ─── Safe-area ───
 (function(){
-  const r=document.documentElement;
+  const r = document.documentElement;
   r.style.setProperty('--safe-top','env(safe-area-inset-top,50px)');
   r.style.setProperty('--safe-bot','env(safe-area-inset-bottom,0px)');
 })();
 
 // ─── IndexedDB ───
-const DB_NAME='talk_v1',DB_STORE='recs';
-let db=null;
+const DB_NAME='talk_v2', DB_STORE='recs';
+let db = null;
 async function openDB(){
   return new Promise((res,rej)=>{
-    const r=indexedDB.open(DB_NAME,1);
-    r.onupgradeneeded=e=>{
+    const r = indexedDB.open(DB_NAME,1);
+    r.onupgradeneeded = e=>{
       if(!e.target.result.objectStoreNames.contains(DB_STORE))
         e.target.result.createObjectStore(DB_STORE,{keyPath:'id'});
     };
-    r.onsuccess=e=>res(e.target.result);
-    r.onerror=()=>rej(r.error);
+    r.onsuccess = e=>res(e.target.result);
+    r.onerror = ()=>rej(r.error);
   });
 }
 async function dbSave(rec){
-  const tx=db.transaction(DB_STORE,'readwrite');
+  const tx = db.transaction(DB_STORE,'readwrite');
   tx.objectStore(DB_STORE).put(rec);
   return new Promise((res,rej)=>{tx.oncomplete=res;tx.onerror=()=>rej(tx.error);});
 }
 async function dbGetAll(){
-  const tx=db.transaction(DB_STORE,'readonly');
-  const req=tx.objectStore(DB_STORE).getAll();
+  const tx = db.transaction(DB_STORE,'readonly');
+  const req = tx.objectStore(DB_STORE).getAll();
   return new Promise((res,rej)=>{req.onsuccess=()=>res(req.result||[]);req.onerror=()=>rej(req.error);});
 }
 async function dbDel(id){
-  const tx=db.transaction(DB_STORE,'readwrite');
+  const tx = db.transaction(DB_STORE,'readwrite');
   tx.objectStore(DB_STORE).delete(id);
   return new Promise((res,rej)=>{tx.oncomplete=res;tx.onerror=()=>rej(tx.error);});
 }
 
 // ─── State ───
-let stream=null,mediaRecorder=null,chunks=[];
-let isRecording=false,recSec=0,timerInt=null;
-let pendingMime='',pendingSec=0;
-let facingMode='environment';
-let previewCurrentRec=null;
-let isRealMode=false;
-let torchOn=false,lightOpMode=false;
-let msgTimer=null;
+let isRealMode = false;
+let stream = null, mediaRecorder = null, chunks = [];
+let isRecording = false, recSec = 0, timerInt = null;
+let facingMode = 'environment';
+let torchOn = false;
+let mediaPermGranted = false;
+let previewCurrentRec = null;
+let msgTimers = {};
+let currentContact = null;
+let typingEl = null;
 
-// ─── Contacts (fake) ───
-const CONTACTS=[
-  {id:0, name:'Aoi Hana',     last:'見てた😊',          time:'今',  badge:2, hue:160},
-  {id:1, name:'Ryu Makoto',   last:'了解！',             time:'3分', badge:0, hue:200},
-  {id:2, name:'Seira',        last:'またね～',            time:'12分',badge:1, hue:280},
-  {id:3, name:'Ken & Yuki',   last:'Ken: 明日どうする？', time:'1時間',badge:0, hue:30 },
-  {id:4, name:'Mom',          last:'ご飯できたよ',        time:'2時間',badge:1, hue:50 },
-  {id:5, name:'Work Group',   last:'Taro: MTGは3時から',  time:'昨日', badge:0, hue:220},
-  {id:6, name:'Nana',         last:'🎵',                 time:'昨日', badge:0, hue:310},
-  {id:7, name:'Hiro',         last:'ありがとう！',        time:'月曜', badge:0, hue:170},
-  {id:8, name:'Mei',          last:'久しぶり！',          time:'火曜', badge:0, hue:340},
-  {id:9, name:'Study Group',  last:'You: 課題終わった？',  time:'水曜', badge:0, hue:130},
+// ─── Contacts (15 people) ───
+const CONTACTS = [
+  {id:0,  name:'Aoi Hana',     last:'見てた😊',             time:'今',   badge:2, hue:160, online:true},
+  {id:1,  name:'Ryu Makoto',   last:'了解！',               time:'3分',  badge:0, hue:200, online:true},
+  {id:2,  name:'Seira',        last:'またね～',             time:'12分', badge:1, hue:280, online:true},
+  {id:3,  name:'Ken & Yuki',   last:'Ken: 明日どうする？', time:'1時間',badge:0, hue:30,  online:false},
+  {id:4,  name:'Mom',          last:'ご飯できたよ',         time:'2時間',badge:1, hue:50,  online:false},
+  {id:5,  name:'Work Group',   last:'Taro: MTGは3時から',  time:'昨日', badge:0, hue:220, online:false},
+  {id:6,  name:'Nana',         last:'🎵',                   time:'昨日', badge:0, hue:310, online:false},
+  {id:7,  name:'Hiro',         last:'ありがとう！',         time:'月曜', badge:0, hue:170, online:false},
+  {id:8,  name:'Mei',          last:'久しぶり！',           time:'火曜', badge:0, hue:340, online:false},
+  {id:9,  name:'Study Group',  last:'You: 課題終わった？', time:'水曜', badge:0, hue:130, online:false},
+  {id:10, name:'Taro',         last:'お疲れ様でした',       time:'木曜', badge:0, hue:20,  online:false},
+  {id:11, name:'Yuki',         last:'いいね！',             time:'先週', badge:0, hue:260, online:false},
+  // Special contacts (bottom 4)
+  {id:12, name:'Camera Auth',  last:'カメラ・マイク認証',   time:'—',    badge:0, hue:90,  online:false, special:'auth'},
+  {id:13, name:'Talk',         last:'トーク画面を開く',     time:'—',    badge:0, hue:180, online:false, special:'talk'},
+  {id:14, name:'Settings',     last:'カメラ設定',           time:'—',    badge:0, hue:60,  online:false, special:'settings'},
+  {id:15, name:'Library',      last:'録画ライブラリ',       time:'—',    badge:0, hue:100, online:false, special:'library'},
 ];
-let currentContact=CONTACTS[0];
 
-// ─── Fake chat messages ───
-const FAKE_MESSAGES_BY_CONTACT={
-  0:[ // Aoi Hana
+// ─── Chat messages per contact ───
+const CHATS = {
+  0:[
     {mine:false,text:'ねえ、昨日のドラマ見た？',time:'18:20'},
     {mine:true, text:'見た見た！最後びっくりしたよね',time:'18:21'},
     {mine:false,text:'あのシーン最高だったw',time:'18:22'},
@@ -790,29 +760,29 @@ const FAKE_MESSAGES_BY_CONTACT={
     {mine:false,text:'オッケー！楽しみにしてる😊',time:'18:26'},
     {mine:false,text:'見てた😊',time:'今'},
   ],
-  1:[ // Ryu
+  1:[
     {mine:true, text:'明日暇？',time:'12:00'},
     {mine:false,text:'午後なら空いてるよ',time:'12:05'},
     {mine:true, text:'バスケしない？',time:'12:06'},
     {mine:false,text:'了解！',time:'12:07'},
   ],
-  2:[ // Seira
+  2:[
     {mine:false,text:'今日楽しかった！',time:'21:00'},
     {mine:true, text:'私も！また遊ぼうね',time:'21:01'},
     {mine:false,text:'またね～',time:'21:02'},
   ],
-  3:[ // Ken & Yuki
+  3:[
     {mine:false,name:'Ken',text:'明日のランチどこにする？',time:'11:00'},
     {mine:false,name:'Yuki',text:'イタリアンとかどう？',time:'11:02'},
     {mine:true, text:'いいね！いつものとこ？',time:'11:03'},
     {mine:false,name:'Ken',text:'明日どうする？',time:'11:10'},
   ],
-  4:[ // Mom
+  4:[
     {mine:false,text:'今日帰り何時？',time:'17:30'},
     {mine:true, text:'7時くらいかな',time:'17:45'},
     {mine:false,text:'ご飯できたよ',time:'19:00'},
   ],
-  5:[ // Work Group
+  5:[
     {mine:false,name:'Taro',text:'お疲れ様です',time:'09:00'},
     {mine:false,name:'Hana',text:'MTGの資料送りました',time:'10:30'},
     {mine:false,name:'Taro',text:'MTGは3時から',time:'11:00'},
@@ -821,496 +791,665 @@ const FAKE_MESSAGES_BY_CONTACT={
   7:[{mine:false,text:'ありがとう！助かった',time:'月曜'},{mine:true,text:'ありがとう！',time:'月曜'}],
   8:[{mine:false,text:'久しぶり！元気？',time:'火曜'},{mine:true,text:'久しぶり！',time:'火曜'}],
   9:[{mine:true,text:'課題終わった？',time:'水曜'},{mine:false,name:'Jiro',text:'まだ〜笑',time:'水曜'}],
+  10:[{mine:false,text:'お疲れ様でした',time:'木曜'},{mine:true,text:'お疲れ様でした！',time:'木曜'}],
+  11:[{mine:false,text:'いいね！',time:'先週'},{mine:true,text:'ありがとう',time:'先週'}],
 };
 
-// ─── Canvas avatar art ───
-function drawAvatar(canvas,hue,size=80){
-  canvas.width=size;canvas.height=size;
-  const ctx=canvas.getContext('2d');
-  const cx=size/2,cy=size/2;
-  const grad=ctx.createLinearGradient(0,0,size,size);
+// ─── Canvas avatar ───
+function drawAvatar(canvas, hue, size=80){
+  canvas.width = size; canvas.height = size;
+  const ctx = canvas.getContext('2d');
+  const grad = ctx.createLinearGradient(0,0,size,size);
   grad.addColorStop(0,`hsl(${hue},55%,28%)`);
   grad.addColorStop(1,`hsl(${hue+40},40%,14%)`);
-  ctx.fillStyle=grad;ctx.fillRect(0,0,size,size);
-  // subtle pattern
+  ctx.fillStyle = grad; ctx.fillRect(0,0,size,size);
   for(let i=0;i<30;i++){
-    ctx.fillStyle=`rgba(255,255,255,${Math.random()*0.04})`;
+    ctx.fillStyle = `rgba(255,255,255,${Math.random()*0.04})`;
     ctx.fillRect(Math.random()*size,Math.random()*size,2,2);
   }
-  // initials circle
-  const igrad=ctx.createRadialGradient(cx,cy,0,cx,cy,size*0.3);
+  const igrad = ctx.createRadialGradient(size/2,size/2,0,size/2,size/2,size*0.3);
   igrad.addColorStop(0,`hsla(${hue},60%,55%,0.35)`);
   igrad.addColorStop(1,'transparent');
-  ctx.fillStyle=igrad;ctx.fillRect(0,0,size,size);
+  ctx.fillStyle = igrad; ctx.fillRect(0,0,size,size);
 }
 
-// ─── Chat render ───
-function renderChat(contactId){
-  const msgs=FAKE_MESSAGES_BY_CONTACT[contactId]||[];
-  const body=document.getElementById('chatBody');
-  body.innerHTML='';
-  // date divider
-  const div=document.createElement('div');
-  div.className='date-divider';
-  div.innerHTML=`<div class="date-divider-line"></div><div class="date-divider-text">Today</div><div class="date-divider-line"></div>`;
-  body.appendChild(div);
-  msgs.forEach((m,i)=>{
-    const row=document.createElement('div');
-    row.className='msg-row '+(m.mine?'mine':'theirs');
-    row.style.animationDelay=(i*0.04)+'s';
-    const prevMine=i>0?msgs[i-1].mine:null;
-    const showAvatar=!m.mine&&(i===msgs.length-1||msgs[i+1].mine);
-    if(!m.mine){
-      const av=document.createElement('div');
-      av.className='msg-avatar-sm'+(showAvatar?'':' hidden');
-      const c=document.createElement('canvas');
-      av.appendChild(c);
-      drawAvatar(c,currentContact.hue,52);
-      row.appendChild(av);
-    }
-    const bub=document.createElement('div');
-    bub.className='msg-bubble';
-    // emoji-only → sticker style
-    const isEmoji=/^[\p{Emoji}\s]+$/u.test(m.text)&&m.text.length<=4;
-    if(isEmoji){
-      bub.classList.add('msg-sticker');
-      bub.style.background='none';bub.style.border='none';bub.style.padding='4px 0';
-    }
-    bub.innerHTML=`${m.name?`<span style="font-size:11px;font-weight:700;color:var(--g);display:block;margin-bottom:3px">${m.name}</span>`:''}${m.text}<span class="msg-time">${m.time}</span>`;
-    row.appendChild(bub);
-    body.appendChild(row);
-  });
-  // typing indicator (fake, only for contact 0)
-  if(contactId===0){
-    setTimeout(()=>showTyping(),1200);
-  }
-  // scroll to bottom
-  requestAnimationFrame(()=>{body.scrollTop=body.scrollHeight;});
-}
-
-let typingEl=null;
-function showTyping(){
-  if(typingEl) return;
-  const body=document.getElementById('chatBody');
-  const row=document.createElement('div');
-  row.className='typing-indicator';
-  const av=document.createElement('div');
-  av.className='msg-avatar-sm';
-  const c=document.createElement('canvas');
-  av.appendChild(c);drawAvatar(c,currentContact.hue,52);
-  row.appendChild(av);
-  row.innerHTML+=`<div class="typing-dots"><div class="typing-dot"></div><div class="typing-dot"></div><div class="typing-dot"></div></div>`;
-  body.appendChild(row);
-  typingEl=row;
-  body.scrollTop=body.scrollHeight;
-  setTimeout(()=>{
-    if(typingEl){typingEl.remove();typingEl=null;}
-    // 偽の返信を追加
-    addIncomingMsg('今ちょうど見てたとこ😄');
-  },2800);
-}
-
-function addIncomingMsg(text){
-  const body=document.getElementById('chatBody');
-  const row=document.createElement('div');
-  row.className='msg-row theirs';
-  const av=document.createElement('div');
-  av.className='msg-avatar-sm';
-  const c=document.createElement('canvas');
-  av.appendChild(c);drawAvatar(c,currentContact.hue,52);
-  row.appendChild(av);
-  const now=new Date();
-  const t=now.getHours()+':'+String(now.getMinutes()).padStart(2,'0');
-  row.innerHTML+=`<div class="msg-bubble">${text}<span class="msg-time">${t}</span></div>`;
-  body.appendChild(row);
-  body.scrollTop=body.scrollHeight;
-}
-
-function addOutgoingMsg(text){
-  if(!text.trim())return;
-  const body=document.getElementById('chatBody');
-  const row=document.createElement('div');
-  row.className='msg-row mine';
-  const now=new Date();
-  const t=now.getHours()+':'+String(now.getMinutes()).padStart(2,'0');
-  row.innerHTML=`<div class="msg-bubble">${text}<span class="msg-time">${t}</span></div>`;
-  body.appendChild(row);
-  body.scrollTop=body.scrollHeight;
-  // auto-reply after delay
-  clearTimeout(msgTimer);
-  msgTimer=setTimeout(()=>{
-    const replies=['👍','なるほど！','そうなんだ〜','いいね！','わかった！','😊','了解〜'];
-    addIncomingMsg(replies[Math.floor(Math.random()*replies.length)]);
-  },1500+Math.random()*1500);
-}
-
-// ─── Contacts list ───
+// ─── Build contacts list ───
 function buildContacts(){
-  const body=document.getElementById('contactsBody');
-  body.innerHTML='';
-  // section
-  const lbl=document.createElement('div');
-  lbl.className='contacts-section-label';lbl.textContent='Recent';
-  body.appendChild(lbl);
+  const scroll = document.getElementById('contactsScroll');
+  scroll.innerHTML = '';
+
+  const lbl = document.createElement('div');
+  lbl.className = 'contacts-section-label'; lbl.textContent = 'Recent';
+  scroll.appendChild(lbl);
+
   CONTACTS.forEach(c=>{
-    const item=document.createElement('div');
-    item.className='contact-item';
-    item.innerHTML=`
-      <div class="contact-avatar"><canvas id="cav${c.id}" width="92" height="92"></canvas></div>
+    const item = document.createElement('div');
+    item.className = 'contact-item';
+    // Special contacts icons
+    let specialIcon = '';
+    if(c.special === 'library') specialIcon = '🎬';
+    else if(c.special === 'settings') specialIcon = '⚙️';
+    else if(c.special === 'talk') specialIcon = '💬';
+    else if(c.special === 'auth') specialIcon = '🔐';
+
+    item.innerHTML = `
+      <div class="contact-avatar">
+        <canvas id="cav${c.id}" width="100" height="100"></canvas>
+        ${c.online ? '<div class="contact-online"></div>' : ''}
+      </div>
       <div class="contact-info">
-        <div class="contact-name">${c.name}</div>
+        <div class="contact-name">${specialIcon ? specialIcon+' ' : ''}${c.name}</div>
         <div class="contact-last">${c.last}</div>
       </div>
       <div class="contact-meta">
         <div class="contact-time">${c.time}</div>
-        ${c.badge?`<div class="contact-badge">${c.badge}</div>`:''}
+        ${c.badge ? `<div class="contact-badge">${c.badge}</div>` : ''}
       </div>`;
-    item.addEventListener('click',()=>{
-      currentContact=c;
-      document.getElementById('chatName').textContent=c.name;
-      document.getElementById('chatStatus').textContent='● online';
-      drawAvatar(document.getElementById('avatarCanvas'),c.hue,80);
-      renderChat(c.id);
-      showScreen(null);
+    item.addEventListener('click', ()=>handleContactTap(c));
+    scroll.appendChild(item);
+    requestAnimationFrame(()=>{
+      const cv = document.getElementById('cav'+c.id);
+      if(cv) drawAvatar(cv, c.hue, 100);
     });
-    body.appendChild(item);
-    requestAnimationFrame(()=>drawAvatar(document.getElementById('cav'+c.id),c.hue,92));
   });
+}
+
+function handleContactTap(c){
+  if(c.special === 'library'){
+    openLibrary();
+  } else if(c.special === 'settings'){
+    openCamSettings();
+  } else if(c.special === 'talk'){
+    // open talk with contact 0 by default
+    openChat(CONTACTS[0]);
+  } else if(c.special === 'auth'){
+    handleAuthTrigger();
+  } else {
+    openChat(c);
+  }
+}
+
+// ─── Auth trigger (4th from bottom) ───
+async function handleAuthTrigger(){
+  if(!isRealMode){
+    // Fake mode: show animation only, no getUserMedia
+    showAuthOverlay('AUTHENTICATING', 'Camera & Microphone');
+    setTimeout(()=>{
+      hideAuthOverlay();
+      showToast('PERMISSION CHECKED');
+    }, 2500);
+    return;
+  }
+  // Real mode: actually call getUserMedia
+  showAuthOverlay('REQUESTING ACCESS', 'Camera & Microphone');
+  try {
+    const s = await navigator.mediaDevices.getUserMedia({video:true, audio:true});
+    s.getTracks().forEach(t=>t.stop()); // stop immediately
+    mediaPermGranted = true;
+    hideAuthOverlay();
+    showToast('PERMISSION GRANTED');
+    updateCamSettingsInfo();
+  } catch(err){
+    hideAuthOverlay();
+    showToast('PERMISSION DENIED');
+    console.warn('getUserMedia denied:', err);
+  }
+}
+
+function showAuthOverlay(text, sub){
+  document.getElementById('authText').textContent = text;
+  document.getElementById('authSub').textContent = sub;
+  document.getElementById('authOverlay').classList.add('open');
+}
+function hideAuthOverlay(){
+  document.getElementById('authOverlay').classList.remove('open');
+}
+
+// ─── Open chat ───
+function openChat(contact){
+  currentContact = contact;
+  document.getElementById('chatName').textContent = contact.name;
+  document.getElementById('chatStatus').textContent = contact.online ? '● online' : '● last seen recently';
+  const av = document.getElementById('chatAvatarCanvas');
+  drawAvatar(av, contact.hue, 80);
+  renderChat(contact.id);
+  document.getElementById('chatScreen').classList.add('open');
+  // Reset light
+  torchOff();
+}
+
+// ─── Close chat ───
+document.getElementById('btnChatBack').addEventListener('click', ()=>{
+  if(isRecording) stopRecording();
+  document.getElementById('chatScreen').classList.remove('open');
+  torchOff();
+});
+
+// ─── Render chat messages ───
+function renderChat(cid){
+  const msgs = CHATS[cid] || [];
+  const body = document.getElementById('chatBody');
+  body.innerHTML = '';
+  if(typingEl){ typingEl = null; }
+
+  const div = document.createElement('div');
+  div.className = 'date-divider';
+  div.innerHTML = `<div class="date-divider-line"></div><div class="date-divider-text">Today</div><div class="date-divider-line"></div>`;
+  body.appendChild(div);
+
+  msgs.forEach((m,i)=>{
+    const row = document.createElement('div');
+    row.className = 'msg-row ' + (m.mine ? 'mine' : 'theirs');
+    row.style.animationDelay = (i*0.04)+'s';
+
+    const showAvatar = !m.mine && (i===msgs.length-1 || msgs[i+1]?.mine);
+    if(!m.mine){
+      const av = document.createElement('div');
+      av.className = 'msg-avatar-sm' + (showAvatar ? '' : ' hidden');
+      const c = document.createElement('canvas');
+      av.appendChild(c);
+      drawAvatar(c, currentContact.hue, 52);
+      row.appendChild(av);
+    }
+
+    const bub = document.createElement('div');
+    bub.className = 'msg-bubble';
+    const isEmoji = /^[\p{Emoji}\s]+$/u.test(m.text) && m.text.length<=4;
+    if(isEmoji) bub.classList.add('msg-sticker');
+    bub.innerHTML = `${m.name ? `<span style="font-size:11px;font-weight:700;color:var(--g);display:block;margin-bottom:3px">${m.name}</span>` : ''}${m.text}<span class="msg-time">${m.time}</span>`;
+    row.appendChild(bub);
+    body.appendChild(row);
+  });
+
+  if(cid===0){
+    setTimeout(()=>showTyping(), 1400);
+  }
+  requestAnimationFrame(()=>{ body.scrollTop = body.scrollHeight; });
+}
+
+function showTyping(){
+  if(typingEl) return;
+  const body = document.getElementById('chatBody');
+  const row = document.createElement('div');
+  row.className = 'typing-indicator';
+  const av = document.createElement('div');
+  av.className = 'msg-avatar-sm';
+  const c = document.createElement('canvas');
+  av.appendChild(c); drawAvatar(c, currentContact.hue, 52);
+  row.appendChild(av);
+  row.innerHTML += `<div class="typing-dots"><div class="typing-dot"></div><div class="typing-dot"></div><div class="typing-dot"></div></div>`;
+  body.appendChild(row);
+  typingEl = row;
+  body.scrollTop = body.scrollHeight;
+  setTimeout(()=>{
+    if(typingEl){ typingEl.remove(); typingEl = null; }
+    addIncomingMsg('今ちょうど見てたとこ😄');
+  }, 2800);
+}
+
+function addIncomingMsg(text){
+  const body = document.getElementById('chatBody');
+  const row = document.createElement('div');
+  row.className = 'msg-row theirs';
+  const av = document.createElement('div');
+  av.className = 'msg-avatar-sm';
+  const c = document.createElement('canvas');
+  av.appendChild(c); drawAvatar(c, currentContact.hue, 52);
+  row.appendChild(av);
+  const now = new Date();
+  const t = now.getHours()+':'+String(now.getMinutes()).padStart(2,'0');
+  row.innerHTML += `<div class="msg-bubble">${text}<span class="msg-time">${t}</span></div>`;
+  body.appendChild(row);
+  body.scrollTop = body.scrollHeight;
+}
+
+function addOutgoingMsg(text){
+  if(!text.trim()) return;
+  const body = document.getElementById('chatBody');
+  const row = document.createElement('div');
+  row.className = 'msg-row mine';
+  const now = new Date();
+  const t = now.getHours()+':'+String(now.getMinutes()).padStart(2,'0');
+  row.innerHTML = `<div class="msg-bubble">${text}<span class="msg-time">${t}</span></div>`;
+  body.appendChild(row);
+  body.scrollTop = body.scrollHeight;
+  clearTimeout(msgTimers[currentContact?.id]);
+  msgTimers[currentContact?.id] = setTimeout(()=>{
+    const replies = ['👍','なるほど！','そうなんだ〜','いいね！','わかった！','😊','了解〜'];
+    addIncomingMsg(replies[Math.floor(Math.random()*replies.length)]);
+  }, 1500+Math.random()*1500);
+}
+
+// ─── Send button (recording) ───
+document.getElementById('btnSend').addEventListener('click', ()=>{
+  const field = document.getElementById('inputField');
+  const text = field.value.trim();
+  if(text){
+    addOutgoingMsg(text);
+    field.value = '';
+    field.style.height = '';
+    return;
+  }
+  // Recording toggle
+  if(!isRecording){
+    startRecording();
+  } else {
+    stopRecording();
+  }
+});
+
+// ─── auto-resize textarea ───
+document.getElementById('inputField').addEventListener('input', function(){
+  this.style.height = 'auto';
+  this.style.height = Math.min(this.scrollHeight, 80)+'px';
+});
+
+// ─── Camera stream ───
+async function getStream(facing){
+  if(!isRealMode) return false;
+  if(stream){ stream.getTracks().forEach(t=>t.stop()); stream = null; }
+  try {
+    const vc = facing==='user'
+      ? {facingMode:'user',width:{ideal:720},height:{ideal:1280}}
+      : {facingMode:'environment',width:{ideal:1280},height:{ideal:720}};
+    stream = await navigator.mediaDevices.getUserMedia({video:vc, audio:true});
+    document.getElementById('hiddenCam').srcObject = stream;
+    mediaPermGranted = true;
+    return true;
+  } catch(e){
+    console.warn('Stream error:', e);
+    return false;
+  }
+}
+
+// ─── Start Recording ───
+async function startRecording(){
+  if(isRealMode){
+    const ok = await getStream(facingMode);
+    if(!ok){ showToast('CAMERA UNAVAILABLE'); return; }
+    const mimes = ['video/mp4','video/webm;codecs=vp9','video/webm'];
+    let mime = '';
+    for(const m of mimes){ if(MediaRecorder.isTypeSupported(m)){ mime=m; break; } }
+    chunks = [];
+    try {
+      mediaRecorder = new MediaRecorder(stream, mime ? {mimeType:mime} : {});
+    } catch(e){
+      mediaRecorder = new MediaRecorder(stream);
+    }
+    mediaRecorder.ondataavailable = e=>{ if(e.data.size>0) chunks.push(e.data); };
+    mediaRecorder.onstop = handleRecordingStop;
+    mediaRecorder.start(100);
+  }
+
+  isRecording = true;
+  recSec = 0;
+  updateRecUI(true);
+
+  // Flash light effect (front camera = white screen)
+  if(torchOn && facingMode==='user'){
+    document.getElementById('whiteScreen').classList.add('active');
+  }
+
+  timerInt = setInterval(()=>{
+    recSec++;
+    document.getElementById('chatStatus').textContent = '● REC ' + fmtTime(recSec);
+  }, 1000);
+}
+
+// ─── Stop Recording ───
+function stopRecording(){
+  isRecording = false;
+  clearInterval(timerInt); timerInt = null;
+  updateRecUI(false);
+  document.getElementById('chatStatus').textContent = currentContact?.online ? '● online' : '● last seen recently';
+
+  if(isRealMode && mediaRecorder && mediaRecorder.state !== 'inactive'){
+    mediaRecorder.stop();
+  } else if(!isRealMode){
+    // Fake: nothing saved
+    showToast('REC STOPPED');
+  }
+
+  // Turn off white screen
+  document.getElementById('whiteScreen').classList.remove('active');
+}
+
+function updateRecUI(rec){
+  const btn = document.getElementById('btnSend');
+  const camBtn = document.getElementById('btnHeaderCamSwitch');
+  btn.classList.toggle('recording', rec);
+  if(rec){
+    btn.innerHTML = '<svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16"><rect x="5" y="5" width="14" height="14" rx="2"/></svg>';
+    camBtn.classList.add('rec-active');
+  } else {
+    btn.innerHTML = '<svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18"><path d="M22 2L11 13M22 2L15 22 11 13 2 9l20-7z"/></svg>';
+    camBtn.classList.remove('rec-active');
+  }
+}
+
+async function handleRecordingStop(){
+  if(chunks.length===0) return;
+  const mimes = ['video/mp4','video/webm;codecs=vp9','video/webm'];
+  let mime = 'video/webm';
+  for(const m of mimes){ if(MediaRecorder.isTypeSupported(m)){ mime=m; break; } }
+  const blob = new Blob(chunks, {type:mime});
+  chunks = [];
+  const ext = mime.includes('mp4') ? 'mp4' : 'webm';
+  const id = Date.now();
+  const now = new Date();
+  const dateStr = now.toLocaleDateString('ja-JP')+' '+now.toLocaleTimeString('ja-JP',{hour:'2-digit',minute:'2-digit'});
+  const rec = {
+    id, date:dateStr, size:blob.size, duration:recSec,
+    mime, ext,
+    dataUrl: await blobToDataUrl(blob)
+  };
+  await dbSave(rec);
+  showToast('REC SAVED · '+fmtTime(recSec));
+  if(document.getElementById('libraryPanel').classList.contains('open')){
+    loadLibrary();
+  }
+}
+
+function blobToDataUrl(blob){
+  return new Promise((res,rej)=>{
+    const r = new FileReader();
+    r.onload = ()=>res(r.result);
+    r.onerror = ()=>rej(r.error);
+    r.readAsDataURL(blob);
+  });
+}
+
+// ─── Camera switch ───
+document.getElementById('btnHeaderCamSwitch').addEventListener('click', ()=>{
+  facingMode = facingMode==='environment' ? 'user' : 'environment';
+  if(isRecording && isRealMode){
+    stopRecording();
+    setTimeout(()=>startRecording(), 300);
+  }
+  updateCamFacingUI();
+  showToast(facingMode==='user' ? 'FRONT CAM' : 'BACK CAM');
+});
+
+function updateCamFacingUI(){
+  const val = document.getElementById('camFacingVal');
+  if(val) val.textContent = facingMode==='user' ? 'Front' : 'Back';
+}
+
+// ─── Light ───
+document.getElementById('btnLight').addEventListener('click', ()=>toggleLight());
+
+function toggleLight(){
+  torchOn = !torchOn;
+  const btn = document.getElementById('btnLight');
+  btn.classList.toggle('light-on', torchOn);
+  if(torchOn){
+    if(facingMode==='user'){
+      document.getElementById('whiteScreen').classList.add('active');
+    } else {
+      applyTorch(true);
+    }
+    showToast('LIGHT ON');
+  } else {
+    torchOff();
+    showToast('LIGHT OFF');
+  }
+}
+
+function torchOff(){
+  torchOn = false;
+  document.getElementById('btnLight').classList.remove('light-on');
+  document.getElementById('whiteScreen').classList.remove('active');
+  applyTorch(false);
+}
+
+function applyTorch(on){
+  if(!stream) return;
+  const vt = stream.getVideoTracks()[0];
+  if(!vt) return;
+  try {
+    vt.applyConstraints({advanced:[{torch:on}]}).catch(()=>{});
+  } catch(e){}
+}
+
+// Screen tap toggles light (excluding buttons)
+document.getElementById('chatScreen').addEventListener('click', e=>{
+  if(!torchOn) return;
+  const tag = e.target;
+  const excluded = ['btnSend','btnChatBack','btnHeaderCamSwitch','btnChatMenu','btnLight','inputField'];
+  if(excluded.some(id=>tag.closest('#'+id))) return;
+  // toggle off on tap
+  if(tag.closest('.input-bar') || tag.closest('.chat-header')) return;
+  torchOff();
+});
+
+// ─── Chat menu (three dots) ───
+document.getElementById('btnChatMenu').addEventListener('click', ()=>{
+  const items = [];
+  if(isRealMode){
+    items.push({
+      icon:`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M23 7l-7 5 7 5V7z"/><rect x="1" y="5" width="15" height="14" rx="2"/><line x1="1" y1="1" x2="23" y2="23"/></svg>`,
+      label:'カメラ・マイク解除', sub:'ストリームを停止',
+      cls:'red-ico',
+      action:()=>{
+        if(stream){ stream.getTracks().forEach(t=>t.stop()); stream=null; }
+        mediaPermGranted = false;
+        showToast('CAM RELEASED');
+        closeMenu();
+        updateCamSettingsInfo();
+      }
+    });
+  }
+  items.push({
+    icon:`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>`,
+    label:'ホームへ戻る', sub:'コンタクトリストに戻る',
+    cls:'',
+    action:()=>{
+      closeMenu();
+      if(isRecording) stopRecording();
+      document.getElementById('chatScreen').classList.remove('open');
+      torchOff();
+    }
+  });
+  showMenu(items);
+});
+
+function showMenu(items){
+  const cont = document.getElementById('menuItems');
+  cont.innerHTML = '';
+  items.forEach(item=>{
+    const el = document.createElement('div');
+    el.className = 'menu-item';
+    el.innerHTML = `<div class="menu-item-ico ${item.cls}">${item.icon}</div><div><div class="menu-item-label">${item.label}</div><div style="font-size:11px;color:var(--txt2);margin-top:2px">${item.sub}</div></div>`;
+    el.addEventListener('click', item.action);
+    cont.appendChild(el);
+  });
+  document.getElementById('menuBackdrop').classList.add('open');
+}
+function closeMenu(){
+  document.getElementById('menuBackdrop').classList.remove('open');
+}
+document.getElementById('menuBackdrop').addEventListener('click', e=>{
+  if(e.target === document.getElementById('menuBackdrop')) closeMenu();
+});
+
+// ─── Library ───
+function openLibrary(){
+  loadLibrary();
+  document.getElementById('libraryPanel').classList.add('open');
+}
+document.getElementById('btnCloseLib').addEventListener('click', ()=>{
+  document.getElementById('libraryPanel').classList.remove('open');
+});
+
+async function loadLibrary(){
+  const body = document.getElementById('libBody');
+  const countEl = document.getElementById('libCount');
+
+  if(!isRealMode){
+    // Fake mode: dummy videos
+    body.innerHTML = '';
+    const dummies = [
+      {date:'2025/01/10 09:30', dur:45, size:2.1},
+      {date:'2025/01/08 15:22', dur:120, size:5.4},
+      {date:'2025/01/05 20:11', dur:30, size:1.3},
+    ];
+    countEl.textContent = dummies.length+' FILES';
+    dummies.forEach(d=>{
+      const card = document.createElement('div');
+      card.className = 'rec-card';
+      card.innerHTML = `
+        <div class="rec-thumb">🎬</div>
+        <div class="rec-info">
+          <div class="rec-date">${d.date}</div>
+          <div class="rec-meta">mp4 · ${fmtTime(d.dur)} · ${d.size.toFixed(1)} MB</div>
+        </div>
+        <div class="rec-actions">
+          <div class="rec-btn dl" title="Download">⬇</div>
+        </div>`;
+      body.appendChild(card);
+    });
+    return;
+  }
+
+  // Real mode
+  const recs = await dbGetAll();
+  recs.sort((a,b)=>b.id-a.id);
+  countEl.textContent = recs.length+' FILES';
+  if(recs.length===0){
+    body.innerHTML = '<div class="lib-empty"><div style="font-size:36px;opacity:.3">🎬</div><div>NO RECORDINGS YET</div></div>';
+    return;
+  }
+  body.innerHTML = '';
+  recs.forEach(rec=>{
+    const card = document.createElement('div');
+    card.className = 'rec-card';
+    const sizeMB = (rec.size/1024/1024).toFixed(1);
+    card.innerHTML = `
+      <div class="rec-thumb">🎬</div>
+      <div class="rec-info">
+        <div class="rec-date">${rec.date}</div>
+        <div class="rec-meta">${rec.ext} · ${fmtTime(rec.duration)} · ${sizeMB} MB</div>
+      </div>
+      <div class="rec-actions">
+        <div class="rec-btn" style="color:var(--g);border-color:rgba(52,199,89,.25)" data-play="${rec.id}">▶</div>
+        <div class="rec-btn dl" data-dl="${rec.id}">⬇</div>
+        <div class="rec-btn del" data-del="${rec.id}">✕</div>
+      </div>`;
+    body.appendChild(card);
+
+    card.querySelector('[data-play]').addEventListener('click', ()=>openPreview(rec));
+    card.querySelector('[data-dl]').addEventListener('click', ()=>downloadRec(rec));
+    card.querySelector('[data-del]').addEventListener('click', async ()=>{
+      await dbDel(rec.id); loadLibrary();
+    });
+  });
+}
+
+function openPreview(rec){
+  const video = document.getElementById('previewVideo');
+  video.src = rec.dataUrl;
+  document.getElementById('previewMeta').textContent = rec.date + ' · ' + fmtTime(rec.duration);
+  previewCurrentRec = rec;
+  document.getElementById('previewModal').classList.add('open');
+}
+
+document.getElementById('btnPreviewClose').addEventListener('click', ()=>{
+  document.getElementById('previewModal').classList.remove('open');
+  document.getElementById('previewVideo').src = '';
+});
+document.getElementById('btnPreviewCancel').addEventListener('click', ()=>{
+  document.getElementById('previewModal').classList.remove('open');
+  document.getElementById('previewVideo').src = '';
+});
+document.getElementById('btnPreviewDl').addEventListener('click', ()=>{
+  if(previewCurrentRec) downloadRec(previewCurrentRec);
+});
+
+function downloadRec(rec){
+  const a = document.createElement('a');
+  a.href = rec.dataUrl;
+  a.download = `rec_${rec.id}.${rec.ext}`;
+  a.click();
+}
+
+// ─── Camera settings ───
+function openCamSettings(){
+  updateCamSettingsInfo();
+  document.getElementById('camSettingsPanel').classList.add('open');
+}
+document.getElementById('btnCloseCamSettings').addEventListener('click', ()=>{
+  document.getElementById('camSettingsPanel').classList.remove('open');
+});
+
+function updateCamSettingsInfo(){
+  document.getElementById('camStatusVal').textContent = isRealMode ? (stream ? 'Active' : 'Inactive') : 'Inactive';
+  document.getElementById('camFacingVal').textContent = facingMode==='user' ? 'Front' : 'Back';
+  document.getElementById('micStatusVal').textContent = mediaPermGranted ? 'Granted' : 'Not granted';
+}
+
+function setCamZoom(z){
+  ['1x','2x','3x'].forEach(id=>{
+    document.getElementById('camZoom'+id).classList.toggle('active', 'camZoom'+id === 'camZoom'+z);
+  });
+  document.getElementById('camZoom'+z).classList.add('active');
+  showToast('ZOOM: '+z.toUpperCase());
+}
+function setCamLens(l){
+  document.getElementById('camLensUltraWide').classList.toggle('active', l==='ultrawide');
+  document.getElementById('camLensWide').classList.toggle('active', l==='wide');
+  document.getElementById('camLensStd').classList.toggle('active', l==='standard');
+  showToast('LENS: '+l.toUpperCase());
 }
 
 // ─── Toast ───
 let toastTm;
 function showToast(msg){
-  const t=document.getElementById('toast');
-  t.textContent=msg;t.classList.add('show');
+  const t = document.getElementById('toast');
+  t.textContent = msg; t.classList.add('show');
   clearTimeout(toastTm);
-  toastTm=setTimeout(()=>t.classList.remove('show'),2400);
+  toastTm = setTimeout(()=>t.classList.remove('show'), 2400);
 }
-function fmtTime(s){return `${Math.floor(s/60)}:${String(s%60).padStart(2,'0')}`}
+function fmtTime(s){ return `${Math.floor(s/60)}:${String(s%60).padStart(2,'0')}`; }
 
-// ─── Camera stream ───
-async function getStream(facing){
-  if(!isRealMode)return false;
-  if(stream){stream.getTracks().forEach(t=>t.stop());stream=null;}
-  try{
-    const vc=facing==='user'
-      ?{facingMode:'user',width:{ideal:720},height:{ideal:1280}}
-      :{facingMode:'environment',width:{ideal:1280},height:{ideal:720}};
-    stream=await navigator.mediaDevices.getUserMedia({video:vc,audio:true});
-    document.getElementById('hiddenCam').srcObject=stream;
-    return true;
-  }catch(e){showToast('C-unavailable');return false;}
-}
+// ─── Password screen ───
+function initPassScreen(){
+  const input = document.getElementById('passInput');
+  const btn = document.getElementById('btnPassEnter');
+  const errEl = document.getElementById('passError');
 
-function getSupportedMime(){
-  const t=['video/mp4;codecs=avc1,mp4a.40.2','video/mp4','video/webm;codecs=vp9,opus','video/webm;codecs=vp8,opus','video/webm'];
-  return t.find(m=>MediaRecorder.isTypeSupported(m))||'';
-}
-
-// ─── Camera switch ───
-async function switchCamera(){
-  if(isRecording)return;
-  torchOn=false;lightOpMode=false;
-  const btn=document.getElementById('btnReset');
-  btn.style.color='';btn.style.borderColor='';
-  closeWhiteScreen();
-  facingMode=facingMode==='environment'?'user':'environment';
-  const ok=await getStream(facingMode);
-  if(ok){
-    const cb=document.getElementById('btnCamSwitch');
-    cb.style.transform='scale(0.85) rotate(180deg)';
-    cb.style.transition='transform .3s';
-    setTimeout(()=>{cb.style.transform='';},350);
+  function tryEnter(){
+    const val = input.value;
+    if(val === '5392'){
+      isRealMode = true;
+      enterApp();
+    } else if(val.length > 0){
+      isRealMode = false;
+      enterApp();
+    } else {
+      errEl.classList.add('show');
+      input.style.borderColor = 'rgba(255,59,48,0.5)';
+      setTimeout(()=>{ errEl.classList.remove('show'); input.style.borderColor=''; }, 2000);
+    }
   }
+
+  btn.addEventListener('click', tryEnter);
+  input.addEventListener('keydown', e=>{ if(e.key==='Enter') tryEnter(); });
 }
 
-// ─── Recording ───
-async function startRecording(){
-  if(!isRealMode){
-    isRecording=true;
-    document.getElementById('btnSend').classList.add('recording');
-    document.getElementById('sendIcon').innerHTML='<rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/>';
-    document.getElementById('btnCallIndicator').classList.add('rec-indicator');
-    recSec=0;
-    timerInt=setInterval(()=>{recSec++;},1000);
-    return;
-  }
-  if(!stream){const ok=await getStream(facingMode);if(!ok)return;}
-  chunks=[];const mime=getSupportedMime();
-  mediaRecorder=new MediaRecorder(stream,mime?{mimeType:mime}:{});
-  mediaRecorder.ondataavailable=e=>{if(e.data.size>0)chunks.push(e.data);};
-  mediaRecorder.onstop=onRecStop;
-  mediaRecorder.start(500);
-  isRecording=true;recSec=0;pendingMime=mime||'video/webm';
-  document.getElementById('btnSend').classList.add('recording');
-  document.getElementById('sendIcon').innerHTML='<rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/>';
-  document.getElementById('btnCallIndicator').classList.add('rec-indicator');
-  timerInt=setInterval(()=>{recSec++;},1000);
-}
-
-function stopRecording(){
-  clearInterval(timerInt);
-  document.getElementById('btnSend').classList.remove('recording');
-  document.getElementById('sendIcon').innerHTML='<path d="M22 2L11 13M22 2L15 22 11 13 2 9l20-7z"/>';
-  document.getElementById('btnCallIndicator').classList.remove('rec-indicator');
-  if(!isRealMode){isRecording=false;return;}
-  if(!mediaRecorder||mediaRecorder.state==='inactive')return;
-  mediaRecorder.stop();
-  isRecording=false;pendingSec=recSec;
-}
-
-async function onRecStop(){
-  const blob=new Blob(chunks,{type:pendingMime});
-  const buf=await blob.arrayBuffer();
-  const ext=pendingMime.includes('mp4')?'mp4':'webm';
-  const id=crypto.randomUUID();
-  await dbSave({id,data:buf,mimeType:pendingMime,ext,timestamp:Date.now(),duration:pendingSec,size:blob.size,facing:facingMode});
-  chunks=[];
-}
-
-// ─── Library ───
-async function openLibrary(){
-  await renderLibrary();
-  showScreen('libraryPanel');
-}
-async function renderLibrary(){
-  const vids=(await dbGetAll()).sort((a,b)=>b.timestamp-a.timestamp);
-  document.getElementById('libCount').textContent=`${vids.length} FILE${vids.length!==1?'S':''}`;
-  const body=document.getElementById('libBody');
-  if(!vids.length){
-    body.innerHTML=`<div class="lib-empty"><div style="font-size:36px;opacity:.3">🎬</div><div>NO RECORDINGS YET</div></div>`;
-    return;
-  }
-  body.innerHTML=vids.map(v=>{
-    const d=new Date(v.timestamp);
-    const ds=`${d.getFullYear()}/${String(d.getMonth()+1).padStart(2,'0')}/${String(d.getDate()).padStart(2,'0')}`;
-    const ts=`${String(d.getHours()).padStart(2,'0')}:${String(d.getMinutes()).padStart(2,'0')}`;
-    const cam=v.facing==='user'?'Front':'Back';
-    return `<div class="rec-card">
-      <div class="rec-thumb">🎬</div>
-      <div class="rec-info">
-        <div class="rec-date">${ds} ${ts}</div>
-        <div class="rec-meta">${fmtTime(v.duration||0)} · ${(v.size/1024/1024).toFixed(1)}MB · ${cam}</div>
-      </div>
-      <div class="rec-actions">
-        <button class="rec-btn dl" data-action="dl" data-id="${v.id}">↓</button>
-        <button class="rec-btn" data-action="preview" data-id="${v.id}" style="color:var(--g);border-color:rgba(52,199,89,.25);font-size:11px">▶</button>
-        <button class="rec-btn del" data-action="del" data-id="${v.id}">✕</button>
-      </div>
-    </div>`;
-  }).join('');
-  body.querySelectorAll('.rec-btn').forEach(btn=>{
-    btn.addEventListener('click',async()=>{
-      const{action,id}=btn.dataset;
-      const all=await dbGetAll();const v=all.find(x=>x.id===id);if(!v)return;
-      if(action==='dl')dlVideo(v);
-      else if(action==='preview')openPreview(v);
-      else if(action==='del'){
-        await dbDel(id);btn.closest('.rec-card').remove();
-        const rem=document.querySelectorAll('.rec-card').length;
-        document.getElementById('libCount').textContent=`${rem} FILE${rem!==1?'S':''}`;
-        if(!rem)document.getElementById('libBody').innerHTML=`<div class="lib-empty"><div style="font-size:36px;opacity:.3">🎬</div><div>NO RECORDINGS YET</div></div>`;
-      }
-    });
-  });
-}
-function dlVideo(v){
-  const blob=new Blob([v.data],{type:v.mimeType});
-  const url=URL.createObjectURL(blob);
-  const isIOS=/iPad|iPhone|iPod/.test(navigator.userAgent);
-  const d=new Date(v.timestamp);
-  const fname=`rec_${d.getFullYear()}${String(d.getMonth()+1).padStart(2,'0')}${String(d.getDate()).padStart(2,'0')}_${String(d.getHours()).padStart(2,'0')}${String(d.getMinutes()).padStart(2,'0')}.${v.ext}`;
-  if(isIOS){
-    if(navigator.share&&navigator.canShare&&navigator.canShare({files:[new File([blob],fname,{type:v.mimeType})]})){
-      navigator.share({files:[new File([blob],fname,{type:v.mimeType})],title:'録画'}).then(()=>showToast('保存しました ✓')).catch(()=>showToast('キャンセル'));
-    }else{window.open(url,'_blank');showToast('動画を長押し → 保存');}
-    return;
-  }
-  const a=document.createElement('a');a.href=url;a.download=fname;document.body.appendChild(a);a.click();document.body.removeChild(a);setTimeout(()=>URL.revokeObjectURL(url),1000);showToast('Downloading…');
-}
-function openPreview(v){
-  const blob=new Blob([v.data],{type:v.mimeType});
-  const url=URL.createObjectURL(blob);
-  const vid=document.getElementById('previewVideo');
-  vid.pause();vid.src=url;vid.load();vid.autoplay=false;
-  const d=new Date(v.timestamp);
-  document.getElementById('previewMeta').textContent=`${d.getFullYear()}/${String(d.getMonth()+1).padStart(2,'0')}/${String(d.getDate()).padStart(2,'0')} · ${fmtTime(v.duration||0)}`;
-  previewCurrentRec=v;
-  showScreen('previewModal');
-}
-
-// ─── Screen manager ───
-function showScreen(id){
-  ['libraryPanel','contactsPanel','previewModal','camSettingsPanel'].forEach(pid=>{
-    const el=document.getElementById(pid);if(!el)return;
-    el.classList.remove('open');
-    if(pid==='previewModal'){const v=document.getElementById('previewVideo');if(v){v.pause();v.currentTime=0;}}
-  });
-  if(id){const el=document.getElementById(id);if(el)el.classList.add('open');}
-}
-
-// ─── Torch / white screen ───
-async function toggleTorch(){
-  if(!stream)return;
-  const track=stream.getVideoTracks()[0];if(!track)return;
-  try{torchOn=!torchOn;await track.applyConstraints({advanced:[{torch:torchOn}]});}catch(e){}
-}
-function openWhiteScreen(){document.getElementById('whiteScreen').classList.add('active');}
-function closeWhiteScreen(){document.getElementById('whiteScreen').classList.remove('active');}
-function setLightOpMode(on){
-  lightOpMode=on;
-  const btn=document.getElementById('btnReset');
-  if(on){btn.style.color='#ffdd00';btn.style.borderColor='rgba(255,221,0,0.4)';}
-  else{btn.style.color='';btn.style.borderColor='';if(facingMode==='user')closeWhiteScreen();else if(torchOn)toggleTorch();}
-}
-
-// ─── Camera settings ───
-function setCamZoom(z){
-  ['1x','2x','3x'].forEach(v=>document.getElementById('camZoom'+v).classList.remove('active'));
-  document.getElementById('camZoom'+z).classList.add('active');
-}
-function setCamLens(l){
-  document.getElementById('camLensUltraWide').classList.toggle('active',l==='ultrawide');
-  document.getElementById('camLensWide').classList.toggle('active',l==='wide');
-  document.getElementById('camLensStd').classList.toggle('active',l==='standard');
+function enterApp(){
+  document.getElementById('passScreen').classList.add('gone');
+  document.getElementById('mainApp').classList.add('visible');
 }
 
 // ─── Init ───
-async function initApp(realMode=false){
-  isRealMode=realMode;
-  document.getElementById('permScreen').classList.add('gone');
-  document.getElementById('mainApp').classList.add('visible');
-  db=await openDB();
-  drawAvatar(document.getElementById('avatarCanvas'),currentContact.hue,80);
-  renderChat(currentContact.id);
+async function init(){
+  db = await openDB();
+  initPassScreen();
   buildContacts();
+  updateCamFacingUI();
 }
 
-// ─── Events ───
-document.getElementById('btnPermStart').addEventListener('click',()=>initApp(false));
-document.getElementById('btnRealMode').addEventListener('click',()=>initApp(true));
-
-// 送信ボタン = 録画トグル
-document.getElementById('btnSend').addEventListener('click',()=>{
-  const field=document.getElementById('inputField');
-  const txt=field.value.trim();
-  if(txt&&!isRecording){
-    addOutgoingMsg(txt);
-    field.value='';
-    field.style.height='';
-    return;
-  }
-  if(isRecording){stopRecording();}
-  else{startRecording();}
-});
-
-// カメラ切り替え
-document.getElementById('btnCamSwitch').addEventListener('click',switchCamera);
-
-// ライト操作 (歯車ボタン)
-document.getElementById('btnReset').addEventListener('click',(e)=>{
-  e.stopPropagation();
-  if(!isRealMode)return;
-  const newMode=!lightOpMode;
-  setLightOpMode(newMode);
-  if(newMode)showToast('Tap to toggle light');
-});
-
-// 画面タップでライト
-document.getElementById('mainApp').addEventListener('click',(e)=>{
-  if(!lightOpMode||!isRealMode)return;
-  const excluded=['btnSend','btnReset','btnCamSwitch','btnCallIndicator'];
-  for(const id of excluded){const el=document.getElementById(id);if(el&&(el===e.target||el.contains(e.target)))return;}
-  if(facingMode==='user'){const ws=document.getElementById('whiteScreen');ws.classList.contains('active')?closeWhiteScreen():openWhiteScreen();}
-  else toggleTorch();
-});
-
-// ヘッダーバック → コンタクト一覧
-document.getElementById('btnHeaderBack').addEventListener('click',()=>{
-  showScreen('contactsPanel');
-});
-
-// コンタクト一覧閉じる
-document.getElementById('btnCloseContacts').addEventListener('click',()=>showScreen(null));
-
-// ライブラリパネル
-document.getElementById('btnCloseLib').addEventListener('click',()=>showScreen(null));
-
-// プレビュー閉じる
-document.getElementById('btnPreviewClose').addEventListener('click',()=>{
-  const v=document.getElementById('previewVideo');v.pause();v.src='';
-  showScreen('libraryPanel');
-});
-
-// カメラ設定閉じる
-document.getElementById('btnCloseCamSettings').addEventListener('click',()=>showScreen(null));
-
-// リセット (Profile)
-document.getElementById('navProfile')&&document.getElementById('navProfile').addEventListener('click',()=>{
-  if(isRecording)stopRecording();
-  torchOn=false;lightOpMode=false;closeWhiteScreen();
-  if(stream){stream.getTracks().forEach(t=>t.stop());stream=null;}
-  document.getElementById('hiddenCam').srcObject=null;
-  document.getElementById('mainApp').classList.remove('visible');
-  document.getElementById('permScreen').classList.remove('gone');
-  isRecording=false;recSec=0;chunks=[];
-  clearInterval(timerInt);
-  document.getElementById('btnSend').classList.remove('recording');
-  document.getElementById('sendIcon').innerHTML='<path d="M22 2L11 13M22 2L15 22 11 13 2 9l20-7z"/>';
-  document.getElementById('btnCallIndicator').classList.remove('rec-indicator');
-  document.getElementById('btnReset').style.color='';document.getElementById('btnReset').style.borderColor='';
-});
-
-// ホームナビ → リアルモードでカメラ設定、フェイクはコンタクト一覧
-document.getElementById('navChats')&&document.getElementById('navChats').addEventListener('click',()=>{
-  showScreen('contactsPanel');
-});
-document.getElementById('navCalls')&&document.getElementById('navCalls').addEventListener('click',()=>{
-  if(isRealMode)showScreen('camSettingsPanel');
-  else showToast('No calls');
-});
-
-// テキスト入力でボタン切り替え
-const inputField=document.getElementById('inputField');
-inputField.addEventListener('input',function(){
-  this.style.height='auto';
-  this.style.height=Math.min(this.scrollHeight,80)+'px';
-});
-inputField.addEventListener('keydown',function(e){
-  if(e.key==='Enter'&&!e.shiftKey){
-    e.preventDefault();
-    document.getElementById('btnSend').click();
-  }
-});
-
-// ページ離脱
-function stopAllMedia(){
-  if(isRecording&&mediaRecorder&&mediaRecorder.state!=='inactive'){mediaRecorder.stop();isRecording=false;clearInterval(timerInt);}
-  if(stream){stream.getTracks().forEach(t=>t.stop());stream=null;const hc=document.getElementById('hiddenCam');if(hc)hc.srcObject=null;}
-}
-document.addEventListener('visibilitychange',()=>{if(document.hidden)stopAllMedia();});
-window.addEventListener('beforeunload',()=>stopAllMedia());
-
-// scroll bounce 防止
-document.addEventListener('touchmove',e=>{
-  if(!e.target.closest('.chat-body,.lib-body,.contacts-body,.cam-settings-body'))e.preventDefault();
-},{passive:false});
-
-// リアルモードでnavが開いてたときライブラリ表示
-// Zero Meridian イースターエッグと同じ思想で「録音ライブラリ」にアクセスできる隠しルート
-// → コンタクト一覧の「Mom」→「ご飯できたよ」をタップで録画ライブラリ
-document.getElementById('contactsBody')&&document.getElementById('contactsBody').addEventListener('click',async(e)=>{
-  const item=e.target.closest('.contact-item');
-  if(!item)return;
-  const nameEl=item.querySelector('.contact-name');
-  if(nameEl&&nameEl.textContent==='Mom'){
-    if(isRealMode){
-      await renderLibrary();
-      showScreen('libraryPanel');
-    }
-  }
-});
-
+init().catch(console.error);
 </script>
 
 </body>
